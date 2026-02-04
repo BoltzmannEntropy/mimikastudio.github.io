@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MimikaStudio — Local Voice Cloning & TTS for macOS</title>
-  <meta name="description" content="Clone any voice in seconds. Local-first voice cloning, text-to-speech, PDF reader, and audiobook creator. Optimized for Apple Silicon.">
-  <meta property="og:title" content="MimikaStudio — Local Voice Cloning & TTS for macOS">
-  <meta property="og:description" content="Clone any voice in seconds. 4 TTS engines, 23 languages, runs entirely on your machine.">
+  <title>MimikaStudio — Local Voice Cloning & TTS for macOS, Windows & Web</title>
+  <meta name="description" content="Clone any voice in seconds. Local-first voice cloning, text-to-speech, PDF reader, and audiobook creator. macOS (MPS), Windows (CUDA), and Web. Tested on RTX 4090 & 5090.">
+  <meta property="og:title" content="MimikaStudio — Local Voice Cloning & TTS for macOS, Windows & Web">
+  <meta property="og:description" content="Clone any voice in seconds. 4 TTS engines, 23 languages. macOS, Windows with CUDA, and Web. Tested on RTX 4090 & 5090.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="images/00-mimikastudio-hero.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -340,43 +340,111 @@
       display: block;
     }
 
-    /* ===== Logos Bar ===== */
-    .logos-bar {
-      padding: 60px 0 0;
+    /* ===== Model Carousel ===== */
+    .model-carousel {
+      padding: 64px 0 0;
       text-align: center;
+      overflow: hidden;
     }
 
-    .logos-bar p {
+    .model-carousel p {
       font-size: 13px;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.1em;
       color: var(--text-dim);
-      margin-bottom: 28px;
+      margin-bottom: 32px;
     }
 
-    .logos-row {
+    .carousel-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .carousel-wrapper::before,
+    .carousel-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 120px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .carousel-wrapper::before {
+      left: 0;
+      background: linear-gradient(to right, var(--bg) 0%, transparent 100%);
+    }
+
+    .carousel-wrapper::after {
+      right: 0;
+      background: linear-gradient(to left, var(--bg) 0%, transparent 100%);
+    }
+
+    .carousel-track {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      width: max-content;
+      animation: carousel-scroll 35s linear infinite;
+    }
+
+    .carousel-track:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes carousel-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .carousel-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+      min-width: 80px;
+    }
+
+    .carousel-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: var(--text);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 48px;
-      flex-wrap: wrap;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    .logo-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text-dim);
-      opacity: 0.6;
-      transition: opacity 0.2s;
+    .carousel-icon:hover {
+      transform: scale(1.08);
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.12);
     }
 
-    .logo-item:hover { opacity: 1; }
+    .carousel-icon svg {
+      width: 28px;
+      height: 28px;
+    }
 
-    .logo-item svg { width: 24px; height: 24px; }
+    .carousel-icon.accent-bg { background: var(--accent); }
+    .carousel-icon.warm-bg { background: #f59e0b; }
+    .carousel-icon.green-bg { background: #10b981; }
+    .carousel-icon.rose-bg { background: #f43f5e; }
+    .carousel-icon.sky-bg { background: #0ea5e9; }
+    .carousel-icon.purple-bg { background: #8b5cf6; }
+    .carousel-icon.teal-bg { background: #14b8a6; }
+    .carousel-icon.orange-bg { background: #f97316; }
+
+    .carousel-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
 
     /* ===== Sections ===== */
     .section { padding: 120px 0; }
@@ -849,7 +917,10 @@
       .engine-grid { grid-template-columns: 1fr; }
       .specs-grid { grid-template-columns: 1fr; }
       .stats-row { grid-template-columns: 1fr 1fr; }
-      .logos-row { gap: 24px; }
+      .carousel-track { gap: 28px; animation-duration: 25s; }
+      .carousel-icon { width: 48px; height: 48px; border-radius: 12px; }
+      .carousel-icon svg { width: 24px; height: 24px; }
+      .carousel-wrapper::before, .carousel-wrapper::after { width: 60px; }
     }
 
     @media (max-width: 480px) {
@@ -908,21 +979,21 @@
     <div class="container">
       <div class="hero-badge reveal">
         <span class="chip">New</span>
-        4 TTS engines &middot; 23 languages &middot; Apple Silicon optimized
+        macOS &middot; Windows &middot; Web &middot; CUDA &middot; Apple MPS
       </div>
       <h1 class="reveal reveal-d1">
         Clone any voice<br><span class="grad">in seconds</span>
       </h1>
       <p class="hero-sub reveal reveal-d2">
         Local-first voice cloning, text-to-speech, PDF reader, and audiobook creator.
-        Runs entirely on your Mac with Metal GPU acceleration.
+        Runs on macOS (MPS), Windows (CUDA), and Web. Tested on RTX 4090 &amp; 5090.
       </p>
       <div class="hero-buttons reveal reveal-d3">
         <a href="#download" class="btn-primary">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/>
           </svg>
-          Download for macOS
+          Get Started
         </a>
         <a href="https://github.com/BoltzmannEntropy/MimikaStudio" class="btn-ghost" target="_blank" rel="noopener">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -933,11 +1004,22 @@
       </div>
       <p class="hero-meta reveal reveal-d4">
         <span>
+          <!-- macOS icon -->
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>
-          macOS 12+
+          macOS (MPS)
         </span>
         <span class="sep">&middot;</span>
-        <span>Apple Silicon & Intel</span>
+        <span>
+          <!-- Windows icon -->
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M3 12V6.5l8-1.1V12H3zm0 .5V18l8 1.1V12.5H3zM12 5.3l9-1.3v8h-9V5.3zM12 12.5V20l9 1.3v-8.8h-9z"/></svg>
+          Windows (CUDA)
+        </span>
+        <span class="sep">&middot;</span>
+        <span>
+          <!-- Web icon -->
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          Web UI
+        </span>
         <span class="sep">&middot;</span>
         <span>Free & Open Source</span>
       </p>
@@ -949,26 +1031,207 @@
     </div>
   </section>
 
-  <!-- Engine Logos -->
-  <section class="logos-bar">
+  <!-- Model Carousel -->
+  <section class="model-carousel">
     <div class="container">
-      <p class="reveal">Powered by leading TTS engines</p>
-      <div class="logos-row reveal reveal-d1">
-        <div class="logo-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-          Kokoro
+      <p class="reveal">TTS &amp; Voice Cloning Models</p>
+    </div>
+    <div class="carousel-wrapper reveal reveal-d1">
+      <div class="carousel-track">
+        <!-- First set -->
+        <div class="carousel-item">
+          <div class="carousel-icon accent-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <span class="carousel-name">Kokoro</span>
         </div>
-        <div class="logo-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-          Qwen3-TTS
+        <div class="carousel-item">
+          <div class="carousel-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+          </div>
+          <span class="carousel-name">Qwen3-TTS</span>
         </div>
-        <div class="logo-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
-          Chatterbox
+        <div class="carousel-item">
+          <div class="carousel-icon green-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <span class="carousel-name">Chatterbox</span>
         </div>
-        <div class="logo-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1"/><circle cx="6" cy="18" r="1"/></svg>
-          IndexTTS-2
+        <div class="carousel-item">
+          <div class="carousel-icon rose-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><line x1="4" y1="8" x2="4" y2="16"/><line x1="8" y1="4" x2="8" y2="20"/><line x1="12" y1="6" x2="12" y2="18"/><line x1="16" y1="4" x2="16" y2="20"/><line x1="20" y1="8" x2="20" y2="16"/></svg>
+          </div>
+          <span class="carousel-name">IndexTTS-2</span>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-icon sky-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M5 3l1.5 1.5"/><path d="M19 3l-1.5 1.5"/></svg>
+          </div>
+          <span class="carousel-name">Whisper</span>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-icon warm-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M2 12h2l3-9 4 18 4-18 3 9h2"/></svg>
+          </div>
+          <span class="carousel-name">Bark</span>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-icon purple-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+          </div>
+          <span class="carousel-name">XTTS</span>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-icon teal-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          </div>
+          <span class="carousel-name">Tortoise TTS</span>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-icon orange-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          </div>
+          <span class="carousel-name">Piper</span>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+          </div>
+          <span class="carousel-name">StyleTTS 2</span>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-icon accent-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+          </div>
+          <span class="carousel-name">F5-TTS</span>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-icon sky-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M2 16s1-4 5-4c2 0 3 2 5 2s3-2 5-2c4 0 5 4 5 4"/><path d="M12 12V2"/><circle cx="12" cy="8" r="2"/></svg>
+          </div>
+          <span class="carousel-name">Fish Speech</span>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-icon green-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          </div>
+          <span class="carousel-name">OpenVoice</span>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-icon rose-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+          </div>
+          <span class="carousel-name">GPT-SoVITS</span>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-icon purple-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <span class="carousel-name">VALL-E</span>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-icon warm-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 10h.01"/><path d="M12 10h.01"/><path d="M16 10h.01"/></svg>
+          </div>
+          <span class="carousel-name">Parler TTS</span>
+        </div>
+
+        <!-- Duplicate set for seamless loop -->
+        <div class="carousel-item">
+          <div class="carousel-icon accent-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <span class="carousel-name">Kokoro</span>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+          </div>
+          <span class="carousel-name">Qwen3-TTS</span>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-icon green-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <span class="carousel-name">Chatterbox</span>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-icon rose-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><line x1="4" y1="8" x2="4" y2="16"/><line x1="8" y1="4" x2="8" y2="20"/><line x1="12" y1="6" x2="12" y2="18"/><line x1="16" y1="4" x2="16" y2="20"/><line x1="20" y1="8" x2="20" y2="16"/></svg>
+          </div>
+          <span class="carousel-name">IndexTTS-2</span>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-icon sky-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M5 3l1.5 1.5"/><path d="M19 3l-1.5 1.5"/></svg>
+          </div>
+          <span class="carousel-name">Whisper</span>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-icon warm-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M2 12h2l3-9 4 18 4-18 3 9h2"/></svg>
+          </div>
+          <span class="carousel-name">Bark</span>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-icon purple-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+          </div>
+          <span class="carousel-name">XTTS</span>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-icon teal-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          </div>
+          <span class="carousel-name">Tortoise TTS</span>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-icon orange-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          </div>
+          <span class="carousel-name">Piper</span>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+          </div>
+          <span class="carousel-name">StyleTTS 2</span>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-icon accent-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+          </div>
+          <span class="carousel-name">F5-TTS</span>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-icon sky-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M2 16s1-4 5-4c2 0 3 2 5 2s3-2 5-2c4 0 5 4 5 4"/><path d="M12 12V2"/><circle cx="12" cy="8" r="2"/></svg>
+          </div>
+          <span class="carousel-name">Fish Speech</span>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-icon green-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          </div>
+          <span class="carousel-name">OpenVoice</span>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-icon rose-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+          </div>
+          <span class="carousel-name">GPT-SoVITS</span>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-icon purple-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <span class="carousel-name">VALL-E</span>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-icon warm-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 10h.01"/><path d="M12 10h.01"/><path d="M16 10h.01"/></svg>
+          </div>
+          <span class="carousel-name">Parler TTS</span>
         </div>
       </div>
     </div>
@@ -1090,7 +1353,7 @@
           <ul class="showcase-bullets">
             <li>
               <span class="bullet-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-              Sub-200ms generation on Apple Silicon
+              Sub-200ms generation on MPS and CUDA
             </li>
             <li>
               <span class="bullet-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span>
@@ -1244,44 +1507,44 @@
     <div class="container">
       <div class="section-header reveal">
         <div class="section-label label-gradient">Built for Performance</div>
-        <h2>Optimized for your Mac</h2>
-        <p>MimikaStudio is engineered for Apple Silicon with Metal GPU acceleration. Everything runs locally on your machine.</p>
+        <h2>Runs on macOS, Windows &amp; Web</h2>
+        <p>MimikaStudio runs natively on macOS with MPS acceleration, on Windows with NVIDIA CUDA (tested on RTX 4090 &amp; 5090), and in any browser via Flutter Web.</p>
       </div>
       <div class="specs-grid">
         <div class="spec-card reveal">
           <div class="spec-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M20 15h2"/><path d="M9 2v2"/><path d="M9 20v2"/><path d="M2 9h2"/><path d="M20 9h2"/></svg>
           </div>
-          <h3>Apple Silicon Native</h3>
-          <p>MPS (Metal Performance Shaders) acceleration for M1, M2, M3, and M4 chips. Optimized neural inference.</p>
+          <h3>macOS + Apple MPS</h3>
+          <p>Metal Performance Shaders acceleration for M1, M2, M3, and M4. Optimized neural inference on Apple Silicon and Intel.</p>
         </div>
         <div class="spec-card reveal reveal-d1">
+          <div class="spec-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <h3>Windows + NVIDIA CUDA</h3>
+          <p>Full CUDA support on Windows. Tested on RTX 4090 and RTX 5090 for maximum inference throughput.</p>
+        </div>
+        <div class="spec-card reveal reveal-d2">
+          <div class="spec-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h3>Flutter Web UI</h3>
+          <p>Access MimikaStudio from any browser. The same Flutter app runs as a web UI backed by the local API server.</p>
+        </div>
+        <div class="spec-card reveal">
           <div class="spec-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
           </div>
           <h3>Sub-200ms Latency</h3>
           <p>Kokoro TTS generates speech almost instantly. Real-time performance for interactive use cases.</p>
         </div>
-        <div class="spec-card reveal reveal-d2">
+        <div class="spec-card reveal reveal-d1">
           <div class="spec-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
           </div>
           <h3>Local & Private</h3>
           <p>No cloud, no accounts, no data leaves your machine. All processing happens on-device with local storage.</p>
-        </div>
-        <div class="spec-card reveal">
-          <div class="spec-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-          </div>
-          <h3>Real-time Monitoring</h3>
-          <p>Track CPU, RAM, and GPU usage live in the app header. Know exactly what resources your models are using.</p>
-        </div>
-        <div class="spec-card reveal reveal-d1">
-          <div class="spec-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-          </div>
-          <h3>Multiple Formats</h3>
-          <p>Input: PDF, EPUB, TXT, MD, DOCX. Output: WAV, MP3, M4B with chapter markers for audiobooks.</p>
         </div>
         <div class="spec-card reveal reveal-d2">
           <div class="spec-icon">
@@ -1298,7 +1561,7 @@
   <section class="section section-dark cta-section" id="download">
     <div class="container">
       <h2 class="reveal">Start cloning voices today</h2>
-      <p class="reveal reveal-d1">Free, open source, runs entirely on your Mac. No account needed.</p>
+      <p class="reveal reveal-d1">Free, open source, runs locally on macOS, Windows, and Web. No account needed.</p>
       <div class="hero-buttons reveal reveal-d2">
         <a href="https://github.com/BoltzmannEntropy/MimikaStudio" class="btn-primary" target="_blank" rel="noopener">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1306,7 +1569,7 @@
             <polyline points="7 10 12 15 17 10"/>
             <line x1="12" y1="15" x2="12" y2="3"/>
           </svg>
-          Download for macOS
+          Get Started
         </a>
         <a href="https://github.com/BoltzmannEntropy/MimikaStudio" class="btn-ghost" target="_blank" rel="noopener">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -1316,7 +1579,7 @@
         </a>
       </div>
       <p class="hero-meta reveal reveal-d3" style="margin-top: 16px;">
-        <span>Windows support coming soon</span>
+        <span>macOS (MPS) &middot; Windows (CUDA) &middot; Web &middot; Tested on RTX 4090 & 5090</span>
       </p>
     </div>
   </section>
