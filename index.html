@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MimikaStudio — Local Voice Cloning & TTS for macOS</title>
+  <meta name="description" content="Clone any voice in seconds. Local-first voice cloning, text-to-speech, PDF reader, and audiobook creator. Optimized for Apple Silicon.">
+  <meta property="og:title" content="MimikaStudio — Local Voice Cloning & TTS for macOS">
+  <meta property="og:description" content="Clone any voice in seconds. 4 TTS engines, 23 languages, runs entirely on your machine.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="images/00-mimikastudio-hero.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" href="images/light-mode-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #09090b;
+      --bg-subtle: #0e0e11;
+      --bg-card: #141416;
+      --bg-card-hover: #1a1a1d;
+      --border: rgba(255, 255, 255, 0.06);
+      --border-hover: rgba(255, 255, 255, 0.12);
+      --text: #fafafa;
+      --text-muted: #a1a1aa;
+      --text-dim: #71717a;
+      --accent: #d4d4d8;
+      --accent-dark: #71717a;
+      --accent-mid: #a1a1aa;
+      --accent-soft: #d4d4d8;
+      --glow: rgba(255, 255, 255, 0.06);
+      --glow-soft: rgba(255, 255, 255, 0.03);
+      --surface-light: #fafafa;
+      --surface-warm: #f5f5f4;
+      --surface-border: #e4e4e7;
+      --text-dark: #18181b;
+      --text-dark-muted: #52525b;
+      --radius: 16px;
+      --radius-lg: 24px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===== Nav ===== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 14px 0;
+      transition: all 0.3s;
+      border-bottom: 1px solid transparent;
+    }
+
+    nav.scrolled {
+      background: rgba(9, 9, 11, 0.82);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom-color: var(--border);
+    }
+
+    nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--text);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 20px;
+      background: var(--text);
+      color: var(--bg);
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 100px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 24px rgba(255, 255, 255, 0.1);
+    }
+
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    /* ===== Hero ===== */
+    .hero {
+      position: relative;
+      padding: 150px 0 80px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -300px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 900px;
+      background: radial-gradient(circle, var(--glow) 0%, var(--glow-soft) 40%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Waveform decoration */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 120%;
+      height: 400px;
+      background:
+        repeating-linear-gradient(90deg, transparent, transparent 8px, rgba(255, 255, 255, 0.015) 8px, rgba(255, 255, 255, 0.015) 9px);
+      pointer-events: none;
+      mask-image: radial-gradient(ellipse 50% 100% at 50% 50%, black 0%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse 50% 100% at 50% 50%, black 0%, transparent 70%);
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px 6px 8px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.03);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge .chip {
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 6.5vw, 76px);
+      font-weight: 900;
+      line-height: 1.02;
+      letter-spacing: -0.035em;
+      color: var(--text);
+      margin-bottom: 24px;
+      max-width: 820px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 .grad {
+      background: linear-gradient(135deg, #e4e4e7 0%, #a1a1aa 60%, #71717a 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: clamp(16px, 2vw, 19px);
+      color: var(--text-muted);
+      max-width: 560px;
+      margin: 0 auto 44px;
+      line-height: 1.65;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-buttons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 30px;
+      background: var(--text);
+      color: var(--bg);
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(255, 255, 255, 0.12);
+    }
+
+    .btn-primary svg { width: 18px; height: 18px; }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 30px;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 15px;
+      font-weight: 500;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-ghost:hover {
+      color: var(--text);
+      border-color: var(--border-hover);
+      transform: translateY(-1px);
+    }
+
+    .hero-meta {
+      font-size: 13px;
+      color: var(--text-dim);
+      margin-top: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-meta .sep { margin: 0 8px; opacity: 0.4; }
+
+    /* ===== Hero Screenshot ===== */
+    .hero-screenshot {
+      position: relative;
+      max-width: 1000px;
+      margin: 56px auto 0;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.03),
+        0 24px 80px rgba(0, 0, 0, 0.6),
+        0 0 160px var(--glow);
+      z-index: 1;
+    }
+
+    .hero-screenshot img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ===== Logos Bar ===== */
+    .logos-bar {
+      padding: 60px 0 0;
+      text-align: center;
+    }
+
+    .logos-bar p {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+      margin-bottom: 28px;
+    }
+
+    .logos-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+
+    .logo-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-dim);
+      opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+
+    .logo-item:hover { opacity: 1; }
+
+    .logo-item svg { width: 24px; height: 24px; }
+
+    /* ===== Sections ===== */
+    .section { padding: 120px 0; }
+    .section-dark { background: var(--bg); }
+    .section-darker { background: var(--bg-subtle); }
+    .section-light { background: var(--surface-light); color: var(--text-dark); }
+    .section-warm { background: var(--surface-warm); color: var(--text-dark); }
+
+    .section-header {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 64px;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+    }
+
+    .label-gradient {
+      color: var(--accent-soft);
+    }
+
+    .section-light .label-gradient,
+    .section-warm .label-gradient {
+      color: var(--accent-dark);
+    }
+
+    .section-header h2 {
+      font-size: clamp(28px, 4vw, 46px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      margin-bottom: 16px;
+    }
+
+    .section-header p {
+      font-size: 17px;
+      line-height: 1.65;
+    }
+
+    .section-dark .section-header p { color: var(--text-muted); }
+    .section-light .section-header p,
+    .section-warm .section-header p { color: var(--text-dark-muted); }
+
+    /* ===== Engine Cards ===== */
+    .engine-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .engine-card {
+      padding: 28px 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .engine-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #d4d4d8, #a1a1aa);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .engine-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-hover);
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
+    }
+
+    .engine-card:hover::before { opacity: 1; }
+
+    .engine-emoji {
+      font-size: 32px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .engine-card h3 {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .engine-card .engine-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+
+    .engine-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .engine-tag {
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+    }
+
+    .engine-tag.highlight {
+      border-color: rgba(255, 255, 255, 0.15);
+      color: var(--accent-soft);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    /* ===== Feature Showcase ===== */
+    .showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .showcase.reversed { direction: rtl; }
+    .showcase.reversed > * { direction: ltr; }
+
+    .showcase-text h3 {
+      font-size: clamp(22px, 3vw, 32px);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    .showcase-text p {
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .section-dark .showcase-text p { color: var(--text-muted); }
+    .section-light .showcase-text p,
+    .section-warm .showcase-text p { color: var(--text-dark-muted); }
+
+    .showcase-bullets {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      list-style: none;
+    }
+
+    .showcase-bullets li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+    }
+
+    .section-dark .showcase-bullets li { color: var(--text-muted); }
+    .section-light .showcase-bullets li,
+    .section-warm .showcase-bullets li { color: var(--text-dark-muted); }
+
+    .showcase-bullets .bullet-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .showcase-bullets .bullet-icon svg {
+      width: 12px;
+      height: 12px;
+      color: var(--accent-soft);
+    }
+
+    .showcase-img {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
+      transition: transform 0.4s;
+    }
+
+    .section-light .showcase-img,
+    .section-warm .showcase-img {
+      border-color: var(--surface-border);
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.08);
+    }
+
+    .showcase-img:hover { transform: scale(1.02); }
+
+    .showcase-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ===== Stats Row ===== */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 80px;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 32px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    .stat-number {
+      font-size: 36px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-dim);
+      font-weight: 500;
+    }
+
+    /* ===== Specs Grid ===== */
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .spec-card {
+      padding: 28px 24px;
+      background: white;
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .spec-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+    }
+
+    .spec-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      background: rgba(113, 113, 122, 0.08);
+    }
+
+    .spec-icon svg {
+      width: 22px;
+      height: 22px;
+      color: var(--accent-dark);
+    }
+
+    .spec-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+    }
+
+    .spec-card p {
+      font-size: 13px;
+      color: var(--text-dark-muted);
+      line-height: 1.6;
+    }
+
+    /* ===== Lang Strip ===== */
+    .lang-strip {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 40px;
+    }
+
+    .lang-pill {
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 500;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .lang-pill:hover {
+      border-color: var(--border-hover);
+      color: var(--text);
+    }
+
+    .lang-pill.active {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.2);
+      color: var(--text);
+    }
+
+    /* ===== CTA ===== */
+    .cta-section {
+      padding: 120px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      bottom: -300px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, var(--glow) 0%, var(--glow-soft) 40%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-section h2 {
+      font-size: clamp(28px, 4vw, 52px);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-section p {
+      font-size: 17px;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-section .hero-buttons { position: relative; z-index: 1; }
+
+    /* ===== Footer ===== */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-logo {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--text-dim);
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    /* ===== Reveal ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+    .reveal-d4 { transition-delay: 0.35s; }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 1024px) {
+      .engine-grid { grid-template-columns: repeat(2, 1fr); }
+      .specs-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .showcase { grid-template-columns: 1fr; gap: 32px; }
+      .showcase.reversed { direction: ltr; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .mobile-toggle { display: block; }
+
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(9, 9, 11, 0.95);
+        backdrop-filter: blur(20px);
+        padding: 20px 24px;
+        gap: 14px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .hero { padding: 120px 0 60px; }
+      .section { padding: 80px 0; }
+      .engine-grid { grid-template-columns: 1fr; }
+      .specs-grid { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .logos-row { gap: 24px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-buttons { flex-direction: column; }
+      .hero-buttons .btn-primary,
+      .hero-buttons .btn-ghost { width: 100%; justify-content: center; }
+      .stats-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav id="nav">
+    <div class="container">
+      <a href="#" class="nav-logo">
+        <div class="nav-logo-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#09090b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+            <line x1="12" y1="19" x2="12" y2="23"/>
+            <line x1="8" y1="23" x2="16" y2="23"/>
+          </svg>
+        </div>
+        MimikaStudio
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#engines">Engines</a></li>
+        <li><a href="#voice-clone">Voice Clone</a></li>
+        <li><a href="#pdf-reader">PDF Reader</a></li>
+        <li><a href="#api">API</a></li>
+        <li><a href="#specs">Specs</a></li>
+        <li>
+          <a href="#download" class="nav-cta">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Download
+          </a>
+        </li>
+      </ul>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge reveal">
+        <span class="chip">New</span>
+        4 TTS engines &middot; 23 languages &middot; Apple Silicon optimized
+      </div>
+      <h1 class="reveal reveal-d1">
+        Clone any voice<br><span class="grad">in seconds</span>
+      </h1>
+      <p class="hero-sub reveal reveal-d2">
+        Local-first voice cloning, text-to-speech, PDF reader, and audiobook creator.
+        Runs entirely on your Mac with Metal GPU acceleration.
+      </p>
+      <div class="hero-buttons reveal reveal-d3">
+        <a href="#download" class="btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/>
+          </svg>
+          Download for macOS
+        </a>
+        <a href="https://github.com/BoltzmannEntropy/MimikaStudio" class="btn-ghost" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+          View on GitHub
+        </a>
+      </div>
+      <p class="hero-meta reveal reveal-d4">
+        <span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>
+          macOS 12+
+        </span>
+        <span class="sep">&middot;</span>
+        <span>Apple Silicon & Intel</span>
+        <span class="sep">&middot;</span>
+        <span>Free & Open Source</span>
+      </p>
+
+      <!-- Hero Screenshot -->
+      <div class="hero-screenshot reveal reveal-d4">
+        <img src="images/00-mimikastudio-hero.png" alt="MimikaStudio - Voice Cloning & TTS" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- Engine Logos -->
+  <section class="logos-bar">
+    <div class="container">
+      <p class="reveal">Powered by leading TTS engines</p>
+      <div class="logos-row reveal reveal-d1">
+        <div class="logo-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+          Kokoro
+        </div>
+        <div class="logo-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          Qwen3-TTS
+        </div>
+        <div class="logo-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+          Chatterbox
+        </div>
+        <div class="logo-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1"/><circle cx="6" cy="18" r="1"/></svg>
+          IndexTTS-2
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TTS Engines -->
+  <section class="section section-dark" id="engines">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label label-gradient">TTS Engines</div>
+        <h2>Four engines, one studio</h2>
+        <p>Each engine brings unique strengths. Use the right one for your task, or combine them for maximum flexibility.</p>
+      </div>
+      <div class="engine-grid">
+        <div class="engine-card reveal">
+          <span class="engine-emoji">&#9889;</span>
+          <h3>Kokoro TTS</h3>
+          <p class="engine-desc">82M parameter model with sub-200ms latency. 21 British and American voices with speed control.</p>
+          <div class="engine-tags">
+            <span class="engine-tag highlight">Fast</span>
+            <span class="engine-tag">21 voices</span>
+            <span class="engine-tag">IPA</span>
+          </div>
+        </div>
+        <div class="engine-card reveal reveal-d1">
+          <span class="engine-emoji">&#127911;</span>
+          <h3>Qwen3-TTS</h3>
+          <p class="engine-desc">Clone any voice from just 3 seconds of audio. 9 premium preset speakers with style instructions.</p>
+          <div class="engine-tags">
+            <span class="engine-tag highlight">Voice Clone</span>
+            <span class="engine-tag">3s reference</span>
+            <span class="engine-tag">Styles</span>
+          </div>
+        </div>
+        <div class="engine-card reveal reveal-d2">
+          <span class="engine-emoji">&#127758;</span>
+          <h3>Chatterbox</h3>
+          <p class="engine-desc">Multilingual voice cloning across 23 languages. Clone voices and speak in any supported language.</p>
+          <div class="engine-tags">
+            <span class="engine-tag highlight">23 languages</span>
+            <span class="engine-tag">Multilingual</span>
+          </div>
+        </div>
+        <div class="engine-card reveal reveal-d3">
+          <span class="engine-emoji">&#128302;</span>
+          <h3>IndexTTS-2</h3>
+          <p class="engine-desc">High-fidelity voice cloning with a large 24GB model for maximum quality and naturalness.</p>
+          <div class="engine-tags">
+            <span class="engine-tag highlight">Hi-Fi</span>
+            <span class="engine-tag">Large model</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-row">
+        <div class="stat reveal">
+          <div class="stat-number">4</div>
+          <div class="stat-label">TTS Engines</div>
+        </div>
+        <div class="stat reveal reveal-d1">
+          <div class="stat-number">23</div>
+          <div class="stat-label">Languages</div>
+        </div>
+        <div class="stat reveal reveal-d2">
+          <div class="stat-number">30+</div>
+          <div class="stat-label">Built-in Voices</div>
+        </div>
+        <div class="stat reveal reveal-d3">
+          <div class="stat-number">60+</div>
+          <div class="stat-label">API Endpoints</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Voice Clone Showcase -->
+  <section class="section section-light" id="voice-clone">
+    <div class="container">
+      <div class="showcase reveal">
+        <div class="showcase-text">
+          <div class="section-label label-gradient">Voice Cloning</div>
+          <h3>Clone any voice from a 3-second sample</h3>
+          <p>Upload a short audio clip and Qwen3-TTS will learn the voice characteristics. Use style instructions to control emotion, pace, and tone.</p>
+          <ul class="showcase-bullets">
+            <li>
+              <span class="bullet-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              3-second minimum reference audio
+            </li>
+            <li>
+              <span class="bullet-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              9 premium preset speakers (Ryan, Aiden, Vivian, Serena...)
+            </li>
+            <li>
+              <span class="bullet-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              Style instructions: "whisper softly", "excited", "formal"
+            </li>
+            <li>
+              <span class="bullet-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              Shared voice library across all engines
+            </li>
+          </ul>
+        </div>
+        <div class="showcase-img">
+          <img src="images/07-chatterbox-voice-clone.png" alt="Voice Cloning Interface" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kokoro TTS Showcase -->
+  <section class="section section-darker">
+    <div class="container">
+      <div class="showcase reversed reveal">
+        <div class="showcase-text">
+          <div class="section-label label-gradient">Kokoro TTS</div>
+          <h3>21 voices with British IPA transcription</h3>
+          <p>The fastest engine in the studio. Generate speech in under 200ms with fine-grained speed control. Includes Emma IPA for phonetic transcription powered by your choice of LLM.</p>
+          <ul class="showcase-bullets">
+            <li>
+              <span class="bullet-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              Sub-200ms generation on Apple Silicon
+            </li>
+            <li>
+              <span class="bullet-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              British & American voice selection
+            </li>
+            <li>
+              <span class="bullet-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              British phonetic (IPA) transcription via Claude or GPT
+            </li>
+          </ul>
+        </div>
+        <div class="showcase-img">
+          <img src="images/01-kokoro-tts-emma-ipa.png" alt="Kokoro TTS with IPA Transcription" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PDF Reader Showcase -->
+  <section class="section section-warm" id="pdf-reader">
+    <div class="container">
+      <div class="showcase reveal">
+        <div class="showcase-text">
+          <div class="section-label label-gradient">PDF Reader & Audiobooks</div>
+          <h3>Turn any document into an audiobook</h3>
+          <p>Read PDFs aloud with sentence-by-sentence highlighting, or convert entire documents to audiobooks with chapter markers. Supports PDF, EPUB, TXT, Markdown, and DOCX.</p>
+          <ul class="showcase-bullets">
+            <li>
+              <span class="bullet-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              Live sentence highlighting as it reads
+            </li>
+            <li>
+              <span class="bullet-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              Export as WAV, MP3, or M4B with chapters
+            </li>
+            <li>
+              <span class="bullet-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              ~60 chars/sec on M2 MacBook Pro
+            </li>
+            <li>
+              <span class="bullet-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              Use any voice, including your cloned voices
+            </li>
+          </ul>
+        </div>
+        <div class="showcase-img">
+          <img src="images/03-pdf-audiobook-creator.png" alt="PDF Reader & Audiobook Creator" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- API & MCP -->
+  <section class="section section-dark" id="api">
+    <div class="container">
+      <div class="showcase reversed reveal">
+        <div class="showcase-text">
+          <div class="section-label label-gradient">MCP & API</div>
+          <h3>60+ endpoints. 50+ MCP tools. Full control.</h3>
+          <p>Integrate MimikaStudio into your workflow with a comprehensive REST API and Model Context Protocol server. Use it programmatically from Claude Code, scripts, or your own applications.</p>
+          <ul class="showcase-bullets">
+            <li>
+              <span class="bullet-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              Full REST API with Swagger docs
+            </li>
+            <li>
+              <span class="bullet-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              MCP server for Claude Code integration
+            </li>
+            <li>
+              <span class="bullet-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              Voice management, audiobook, and TTS endpoints
+            </li>
+          </ul>
+        </div>
+        <div class="showcase-img">
+          <img src="images/06-mcp-api-dashboard.png" alt="MCP & API Dashboard" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Model Manager -->
+  <section class="section section-light">
+    <div class="container">
+      <div class="showcase reveal">
+        <div class="showcase-text">
+          <div class="section-label label-gradient">Model Manager</div>
+          <h3>Download models with one click</h3>
+          <p>The built-in model manager lets you download and manage TTS models directly from the app. See model sizes, status, and switch between engines instantly.</p>
+          <ul class="showcase-bullets">
+            <li>
+              <span class="bullet-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              One-click model downloads
+            </li>
+            <li>
+              <span class="bullet-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              Automatic model detection & status
+            </li>
+            <li>
+              <span class="bullet-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              Choose model size: 0.6B (fast) or 1.7B (quality)
+            </li>
+          </ul>
+        </div>
+        <div class="showcase-img">
+          <img src="images/10-model-manager.png" alt="Model Manager" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Languages -->
+  <section class="section section-darker">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label label-gradient">Languages</div>
+        <h2>Speak in 23 languages</h2>
+        <p>Chatterbox brings multilingual voice cloning. Clone a voice in English and speak in Japanese, or any other supported language.</p>
+      </div>
+      <div class="lang-strip reveal">
+        <span class="lang-pill active">English</span>
+        <span class="lang-pill">German</span>
+        <span class="lang-pill">Spanish</span>
+        <span class="lang-pill">French</span>
+        <span class="lang-pill">Italian</span>
+        <span class="lang-pill">Japanese</span>
+        <span class="lang-pill">Korean</span>
+        <span class="lang-pill">Portuguese</span>
+        <span class="lang-pill">Russian</span>
+        <span class="lang-pill">Chinese</span>
+        <span class="lang-pill">Arabic</span>
+        <span class="lang-pill">Danish</span>
+        <span class="lang-pill">Hindi</span>
+        <span class="lang-pill">Dutch</span>
+        <span class="lang-pill">Norwegian</span>
+        <span class="lang-pill">Polish</span>
+        <span class="lang-pill">Swedish</span>
+        <span class="lang-pill">Turkish</span>
+        <span class="lang-pill">Filipino</span>
+        <span class="lang-pill">Malay</span>
+        <span class="lang-pill">Swahili</span>
+        <span class="lang-pill">Hebrew</span>
+        <span class="lang-pill">Finnish</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Specs -->
+  <section class="section section-light" id="specs">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label label-gradient">Built for Performance</div>
+        <h2>Optimized for your Mac</h2>
+        <p>MimikaStudio is engineered for Apple Silicon with Metal GPU acceleration. Everything runs locally on your machine.</p>
+      </div>
+      <div class="specs-grid">
+        <div class="spec-card reveal">
+          <div class="spec-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M20 15h2"/><path d="M9 2v2"/><path d="M9 20v2"/><path d="M2 9h2"/><path d="M20 9h2"/></svg>
+          </div>
+          <h3>Apple Silicon Native</h3>
+          <p>MPS (Metal Performance Shaders) acceleration for M1, M2, M3, and M4 chips. Optimized neural inference.</p>
+        </div>
+        <div class="spec-card reveal reveal-d1">
+          <div class="spec-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <h3>Sub-200ms Latency</h3>
+          <p>Kokoro TTS generates speech almost instantly. Real-time performance for interactive use cases.</p>
+        </div>
+        <div class="spec-card reveal reveal-d2">
+          <div class="spec-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <h3>Local & Private</h3>
+          <p>No cloud, no accounts, no data leaves your machine. All processing happens on-device with local storage.</p>
+        </div>
+        <div class="spec-card reveal">
+          <div class="spec-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <h3>Real-time Monitoring</h3>
+          <p>Track CPU, RAM, and GPU usage live in the app header. Know exactly what resources your models are using.</p>
+        </div>
+        <div class="spec-card reveal reveal-d1">
+          <div class="spec-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <h3>Multiple Formats</h3>
+          <p>Input: PDF, EPUB, TXT, MD, DOCX. Output: WAV, MP3, M4B with chapter markers for audiobooks.</p>
+        </div>
+        <div class="spec-card reveal reveal-d2">
+          <div class="spec-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <h3>CLI & MCP Server</h3>
+          <p>Full command-line interface and MCP server for automation. Integrate into Claude Code or any workflow.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section section-dark cta-section" id="download">
+    <div class="container">
+      <h2 class="reveal">Start cloning voices today</h2>
+      <p class="reveal reveal-d1">Free, open source, runs entirely on your Mac. No account needed.</p>
+      <div class="hero-buttons reveal reveal-d2">
+        <a href="https://github.com/BoltzmannEntropy/MimikaStudio" class="btn-primary" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Download for macOS
+        </a>
+        <a href="https://github.com/BoltzmannEntropy/MimikaStudio" class="btn-ghost" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+          View on GitHub
+        </a>
+      </div>
+      <p class="hero-meta reveal reveal-d3" style="margin-top: 16px;">
+        <span>Windows support coming soon</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-left">
+          <span class="footer-logo">MimikaStudio</span>
+          <span class="footer-copy">&copy; 2026 Shlomo Kashani. All rights reserved.</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="https://github.com/BoltzmannEntropy/MimikaStudio" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="#engines">Engines</a></li>
+          <li><a href="#specs">Specs</a></li>
+          <li><a href="#download">Download</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Nav scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // Mobile menu
+    const toggle = document.getElementById('mobileToggle');
+    const links = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => links.classList.toggle('open'));
+    links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const t = document.querySelector(this.getAttribute('href'));
+        if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      });
+    });
+  </script>
+</body>
+</html>
