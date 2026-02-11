@@ -44,6 +44,29 @@
       --radius-lg: 24px;
     }
 
+    [data-theme="dark"] {
+      --bg: #0f172a;
+      --bg-subtle: #1e293b;
+      --bg-card: #1e293b;
+      --bg-card-hover: #334155;
+      --border: #334155;
+      --border-hover: #475569;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --accent: #818cf8;
+      --accent-dark: #6366f1;
+      --accent-mid: #a5b4fc;
+      --accent-soft: rgba(99, 102, 241, 0.15);
+      --glow: rgba(129, 140, 248, 0.12);
+      --glow-soft: rgba(129, 140, 248, 0.06);
+      --surface-light: #1e293b;
+      --surface-warm: #1e293b;
+      --surface-border: #334155;
+      --text-dark: #f1f5f9;
+      --text-dark-muted: #94a3b8;
+    }
+
     html { scroll-behavior: smooth; }
 
     body {
@@ -81,6 +104,11 @@
       -webkit-backdrop-filter: blur(20px);
       border-bottom-color: var(--border);
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+
+    [data-theme="dark"] nav.scrolled {
+      background: rgba(15, 23, 42, 0.85);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
     }
 
     nav .container {
@@ -141,6 +169,61 @@
     .nav-cta:hover {
       transform: translateY(-1px);
       box-shadow: 0 4px 24px rgba(15, 23, 42, 0.15);
+    }
+
+    [data-theme="dark"] .nav-cta {
+      background: var(--accent);
+      box-shadow: 0 4px 24px rgba(99, 102, 241, 0.3);
+    }
+
+    [data-theme="dark"] .nav-cta:hover {
+      background: var(--accent-mid);
+      box-shadow: 0 6px 28px rgba(99, 102, 241, 0.4);
+    }
+
+    /* Theme Toggle */
+    .theme-toggle-group {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px;
+      background: var(--bg-subtle);
+      border-radius: 100px;
+      border: 1px solid var(--border);
+    }
+
+    .theme-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 100px;
+      border: none;
+      background: transparent;
+      color: var(--text-dim);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .theme-btn:hover {
+      color: var(--text);
+    }
+
+    .theme-btn.active {
+      background: var(--bg-card);
+      color: var(--accent);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    [data-theme="dark"] .theme-btn.active {
+      background: var(--bg-card);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .theme-btn svg {
+      width: 16px;
+      height: 16px;
     }
 
     .mobile-toggle {
@@ -278,6 +361,16 @@
     .btn-primary:hover {
       transform: translateY(-2px);
       box-shadow: 0 8px 32px rgba(15, 23, 42, 0.18);
+    }
+
+    [data-theme="dark"] .btn-primary {
+      background: var(--accent);
+      box-shadow: 0 8px 32px rgba(99, 102, 241, 0.3);
+    }
+
+    [data-theme="dark"] .btn-primary:hover {
+      background: var(--accent-mid);
+      box-shadow: 0 12px 40px rgba(99, 102, 241, 0.4);
     }
 
     .btn-primary svg { width: 18px; height: 18px; }
@@ -682,7 +775,7 @@
 
     .spec-card {
       padding: 28px 24px;
-      background: white;
+      background: var(--bg-card);
       border: 1px solid var(--surface-border);
       border-radius: var(--radius);
       transition: transform 0.3s, box-shadow 0.3s;
@@ -1046,6 +1139,19 @@
       color: rgba(255, 255, 255, 0.5);
     }
 
+    [data-theme="dark"] .cta-section {
+      background: linear-gradient(135deg, var(--accent-dark) 0%, #4338ca 100%);
+    }
+
+    [data-theme="dark"] .cta-section .btn-primary {
+      background: #ffffff;
+      color: var(--accent-dark);
+    }
+
+    [data-theme="dark"] .cta-section .btn-primary:hover {
+      box-shadow: 0 8px 32px rgba(255, 255, 255, 0.25);
+    }
+
     /* ===== Footer ===== */
     footer {
       border-top: 1px solid var(--border);
@@ -1136,6 +1242,11 @@
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
       }
 
+      [data-theme="dark"] .nav-links.open {
+        background: rgba(15, 23, 42, 0.97);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      }
+
       .hero { padding: 120px 0 60px; }
       .section { padding: 80px 0; }
       .engine-grid { grid-template-columns: 1fr; }
@@ -1198,6 +1309,28 @@
             </svg>
             Download
           </a>
+        </li>
+        <li>
+          <div class="theme-toggle-group">
+            <button class="theme-btn active" data-theme-value="light" aria-label="Light mode">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"/>
+                <line x1="12" y1="1" x2="12" y2="3"/>
+                <line x1="12" y1="21" x2="12" y2="23"/>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                <line x1="1" y1="12" x2="3" y2="12"/>
+                <line x1="21" y1="12" x2="23" y2="12"/>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+              </svg>
+            </button>
+            <button class="theme-btn" data-theme-value="dark" aria-label="Dark mode">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+              </svg>
+            </button>
+          </div>
         </li>
       </ul>
       <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
@@ -1826,6 +1959,27 @@
         }
       })
       .catch(() => {});
+
+    // Theme toggle
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
+    // Update active button state
+    function updateThemeButtons(theme) {
+      document.querySelectorAll('.theme-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.themeValue === theme);
+      });
+    }
+    updateThemeButtons(savedTheme);
+
+    document.querySelectorAll('.theme-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const theme = btn.dataset.themeValue;
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        updateThemeButtons(theme);
+      });
+    });
   </script>
 </body>
 </html>
