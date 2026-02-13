@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MimikaStudio — Local Voice Cloning & TTS for macOS, Windows & Web</title>
-  <meta name="description" content="Clone any voice in seconds. Local-first voice cloning, text-to-speech, PDF reader, and audiobook creator. macOS (MPS), Windows (CUDA), and Web. Tested on RTX 4090 & 5090.">
-  <meta property="og:title" content="MimikaStudio — Local Voice Cloning & TTS for macOS, Windows & Web">
-  <meta property="og:description" content="Clone any voice in seconds. 4 TTS engines, 23 languages. macOS, Windows with CUDA, and Web. Tested on RTX 4090 & 5090.">
+  <title>MimikaStudio — Local Voice Cloning & TTS for macOS (Apple Silicon)</title>
+  <meta name="description" content="Clone any voice in seconds. Local-first voice cloning, text-to-speech, PDF reader, and audiobook creator. Optimized for Apple Silicon with native Metal acceleration via MLX.">
+  <meta property="og:title" content="MimikaStudio — Local Voice Cloning & TTS for macOS (Apple Silicon)">
+  <meta property="og:description" content="Clone any voice in seconds. 3 TTS engines, 23 languages. Native MLX acceleration on Apple Silicon. Windows support coming soon.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="images/01-mimikastudio.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -1517,15 +1517,15 @@
   <section class="hero">
     <div class="container">
       <div class="hero-badge reveal">
-        <span class="chip">New</span>
-        macOS &middot; Windows &middot; Web &middot; CUDA &middot; Apple MPS
+        <span class="chip">v2026.02</span>
+        macOS (Apple Silicon) &middot; MLX Native &middot; Windows coming soon
       </div>
       <h1 class="reveal reveal-d1">
         Clone any voice<br><span class="grad">in seconds</span>
       </h1>
       <p class="hero-sub reveal reveal-d2">
         Local-first voice cloning, text-to-speech, PDF reader, and audiobook creator.
-        Runs on macOS (MPS), Windows (CUDA), and Web. Tested on RTX 4090 &amp; 5090.
+        Optimized for Apple Silicon with native Metal acceleration via MLX.
       </p>
       <div class="hero-buttons reveal reveal-d3">
         <a href="#download" class="btn-primary">
@@ -1545,19 +1545,19 @@
         <span>
           <!-- macOS icon -->
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>
-          macOS (MPS)
+          macOS (Apple Silicon)
         </span>
         <span class="sep">&middot;</span>
         <span>
-          <!-- Windows icon -->
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M3 12V6.5l8-1.1V12H3zm0 .5V18l8 1.1V12.5H3zM12 5.3l9-1.3v8h-9V5.3zM12 12.5V20l9 1.3v-8.8h-9z"/></svg>
-          Windows (CUDA)
+          <!-- MLX icon -->
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg>
+          MLX-Audio
         </span>
         <span class="sep">&middot;</span>
         <span>
-          <!-- Web icon -->
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          Web UI
+          <!-- Free icon -->
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          Open Source
         </span>
 
       </p>
@@ -1947,23 +1947,23 @@
     <div class="container">
       <div class="section-header reveal">
         <div class="section-label label-gradient">Built for Performance</div>
-        <h2>Runs on macOS, Windows &amp; Web</h2>
-        <p>MimikaStudio runs natively on macOS with MPS acceleration, on Windows with NVIDIA CUDA (tested on RTX 4090 &amp; 5090), and in any browser via Flutter Web.</p>
+        <h2>Optimized for Apple Silicon</h2>
+        <p>MimikaStudio runs natively on macOS with MLX-Audio, Apple's machine learning framework. Native Metal acceleration on M1, M2, M3, and M4 chips. Windows support coming soon.</p>
       </div>
       <div class="specs-grid">
         <div class="spec-card reveal">
           <div class="spec-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M20 15h2"/><path d="M9 2v2"/><path d="M9 20v2"/><path d="M2 9h2"/><path d="M20 9h2"/></svg>
           </div>
-          <h3>macOS + Apple MPS</h3>
-          <p>Metal Performance Shaders acceleration for M1, M2, M3, and M4. Optimized neural inference on Apple Silicon and Intel.</p>
+          <h3>macOS + MLX-Audio</h3>
+          <p>Native Metal acceleration via Apple's MLX framework. Optimized neural inference on M1, M2, M3, and M4 chips.</p>
         </div>
         <div class="spec-card reveal reveal-d1">
           <div class="spec-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
           </div>
-          <h3>Windows + NVIDIA CUDA</h3>
-          <p>Full CUDA support on Windows. Tested on RTX 4090 and RTX 5090 for maximum inference throughput.</p>
+          <h3>Windows Coming Soon</h3>
+          <p>The codebase supports Windows with CUDA. Pre-built Windows binaries will be available in a future release.</p>
         </div>
         <div class="spec-card reveal reveal-d2">
           <div class="spec-icon">
@@ -2080,7 +2080,7 @@
   <section class="section section-dark cta-section" id="download">
     <div class="container">
       <h2 class="reveal">Start cloning voices today</h2>
-      <p class="reveal reveal-d1">Runs locally on macOS, Windows, and Web. No account needed.</p>
+      <p class="reveal reveal-d1">Runs locally on macOS (Apple Silicon). No account needed. Windows support coming soon.</p>
       <div class="hero-buttons reveal reveal-d2">
         <a href="https://github.com/BoltzmannEntropy/MimikaStudio" class="btn-primary" target="_blank" rel="noopener">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -2098,7 +2098,7 @@
         </a>
       </div>
       <p class="hero-meta reveal reveal-d3" style="margin-top: 16px;">
-        <span>macOS (MPS) &middot; Windows (CUDA) &middot; Web &middot; Tested on RTX 4090 & 5090</span>
+        <span>macOS (Apple Silicon) &middot; MLX-Audio &middot; Open Source</span>
       </p>
     </div>
   </section>
@@ -2112,7 +2112,7 @@
             <span class="footer-mark">M</span>
             <span class="footer-name">MimikaStudio</span>
           </div>
-          <p class="footer-desc">Voice cloning and TTS studio for macOS, Windows, and web workflows.</p>
+          <p class="footer-desc">Voice cloning and TTS studio for macOS (Apple Silicon). Windows support coming soon.</p>
           <a class="footer-email" href="mailto:solomon@qneura.ai">solomon@qneura.ai</a>
         </div>
         <div class="footer-col">
@@ -2146,8 +2146,8 @@
         <div>Made with &hearts; for creators everywhere. <a href="https://qneura.ai/apps.html" target="_blank" rel="noopener">QNeura.ai</a></div>
         <div class="footer-badges">
         <span class="footer-badge">macOS</span>
-        <span class="footer-badge">Windows</span>
-        <span class="footer-badge">Web</span>
+        <span class="footer-badge">Apple Silicon</span>
+        <span class="footer-badge">MLX</span>
         </div>
       </div>
     </div>
