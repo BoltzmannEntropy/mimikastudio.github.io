@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>License — MimikaStudio</title>
-  <meta name="description" content="Business Source License 1.1 for MimikaStudio.">
+  <meta name="description" content="Licensing overview for MimikaStudio source code and binary distribution.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -37,6 +37,16 @@
     a:hover { text-decoration: underline; }
     .back-link { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 32px; font-weight: 500; }
     .last-updated { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.875rem; }
+    .license-shot {
+      display: block;
+      width: 100%;
+      max-width: 720px;
+      margin: 28px auto 40px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: var(--bg-subtle);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+    }
     pre.license-text {
       margin-top: 24px;
       padding: 20px;
@@ -320,15 +330,26 @@
   <div class="container">
     <a href="index.html" class="back-link">&larr; Back to MimikaStudio</a>
 
-    <h1>Business Source License 1.1</h1>
-    <p class="subtitle">License for MimikaStudio</p>
+    <h1>Licensing Overview</h1>
+    <p class="subtitle">Source code and binary distribution terms for MimikaStudio</p>
+    <img class="license-shot" src="images/license-ui.png" alt="MimikaStudio license screen">
+
+    <p>MimikaStudio is source-available under a BSL-style license. Source code use is
+    allowed, while the official binary distribution has stricter terms.</p>
+
+    <h2>Source Code License (BSL 1.1)</h2>
+    <p>The Business Source License 1.1 applies to the MimikaStudio source code. Production
+    use is permitted under the Additional Use Grant.</p>
     <pre class="license-text">Business Source License 1.1
+
+Copyright (C) 2017 MariaDB Corporation Ab, All Rights Reserved.
+"Business Source License" is a trademark of MariaDB Corporation Ab.
 
 Parameters
 Licensor: QNeura.ai
-Licensed Work: MimikaStudio
-Additional Use Grant: None
-Change Date: 2029-01-01
+Licensed Work: MimikaStudio Source Code
+Additional Use Grant: You may use the Licensed Work for any purpose, including production use.
+Change Date: 2030-02-01
 Change License: GPL-2.0-or-later
 
 Terms
@@ -379,6 +400,10 @@ as long as you comply with the Covenants of Licensor below.
 
 Covenants of Licensor
 
+In consideration of the right to use this License's text and the "Business
+Source License" name and trademark, Licensor covenants to MariaDB, and to all
+other recipients of the licensed work to be provided by Licensor:
+
 1. To specify as the Change License the GPL Version 2.0 or any later version,
    or a license that is compatible with GPL Version 2.0 or a later version,
    where "compatible" means that software provided under the Change License can
@@ -395,7 +420,43 @@ Covenants of Licensor
 4. Not to modify this License in any other way.
 </pre>
 
-    <p class="last-updated">Last updated: February 2026</p>
+    <h2>Binary Distribution License</h2>
+    <p>The official DMG/executable binaries are governed by a separate Binary Distribution
+    License. Commercial use or redistribution of the Binary is not allowed.</p>
+    <pre class="license-text">Binary Distribution License
+
+This Binary Distribution License ("License") governs use of the compiled
+binary distribution for MimikaStudio (the "Binary"), including DMG, EXE, and
+app bundles.
+
+1. License Grant
+You may install and use the Binary for personal or internal evaluation use.
+
+2. Restrictions
+You may not sell, rent, sublicense, or redistribute the Binary.
+You may not use the Binary for any commercial offering or commercial purpose.
+
+3. Source Code
+Source code is licensed separately under the Business Source License 1.1.
+See LICENSE for details.
+
+4. No Warranty
+THE BINARY IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+
+5. Limitation of Liability
+IN NO EVENT SHALL QNEURA.AI BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+LIABILITY ARISING FROM THE USE OF THE BINARY.
+
+6. Contact
+If you need commercial binary distribution rights, contact solomon@qneura.ai.
+</pre>
+
+    <h2>Need Commercial Rights?</h2>
+    <p>Contact solomon@qneura.ai for commercial binary licensing.</p>
+
+    <p class="last-updated">Last updated: March 2026</p>
   </div>
   <script>
     (function() {
