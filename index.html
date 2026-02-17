@@ -1692,6 +1692,14 @@
       font-variant-numeric: tabular-nums;
     }
 
+    .audio-visualizer {
+      width: 100%;
+      height: 40px;
+      border-radius: 6px;
+      background: var(--bg-subtle);
+      margin-bottom: 6px;
+    }
+
     /* Comparison card (voice cloning) */
     .sample-card-comparison {
       display: grid;
@@ -1960,19 +1968,20 @@
       <div class="samples-model-group reveal">
         <div class="samples-model-header">
           <h3><span class="model-icon">&#127908;</span> Kokoro</h3>
-          <p>Built-in voices with natural prosody. No reference audio needed.</p>
+          <p>Built-in voices with natural prosody. Reading from the Book of Job.</p>
         </div>
         <div class="samples-grid">
           <div class="sample-card">
             <div class="sample-card-header">
               <span class="sample-card-title">Emma</span>
             </div>
-            <p class="sample-card-desc">British Female</p>
+            <p class="sample-card-desc">Job 6:1-2 &middot; British Female</p>
             <div class="audio-player" data-src="audio/kokoro/emma.wav">
               <button class="play-btn" aria-label="Play">
                 <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
               </button>
               <div class="audio-progress">
+                <canvas class="audio-visualizer" width="200" height="40"></canvas>
                 <div class="progress-bar"><div class="progress-fill"></div></div>
                 <span class="audio-time">0:00</span>
               </div>
@@ -1982,12 +1991,13 @@
             <div class="sample-card-header">
               <span class="sample-card-title">George</span>
             </div>
-            <p class="sample-card-desc">British Male</p>
+            <p class="sample-card-desc">Job 14:7 &middot; British Male</p>
             <div class="audio-player" data-src="audio/kokoro/george.wav">
               <button class="play-btn" aria-label="Play">
                 <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
               </button>
               <div class="audio-progress">
+                <canvas class="audio-visualizer" width="200" height="40"></canvas>
                 <div class="progress-bar"><div class="progress-fill"></div></div>
                 <span class="audio-time">0:00</span>
               </div>
@@ -1997,12 +2007,13 @@
             <div class="sample-card-header">
               <span class="sample-card-title">Lily</span>
             </div>
-            <p class="sample-card-desc">British Female</p>
+            <p class="sample-card-desc">Job 42:5-6 &middot; British Female</p>
             <div class="audio-player" data-src="audio/kokoro/lily.wav">
               <button class="play-btn" aria-label="Play">
                 <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
               </button>
               <div class="audio-progress">
+                <canvas class="audio-visualizer" width="200" height="40"></canvas>
                 <div class="progress-bar"><div class="progress-fill"></div></div>
                 <span class="audio-time">0:00</span>
               </div>
@@ -2840,6 +2851,9 @@
       return `${mins}:${secs.toString().padStart(2, '0')}`;
     }
 
+    let currentVisualizer = null;
+    let currentAnimationId = null;
+
     function stopCurrentAudio() {
       if (currentAudio) {
         currentAudio.pause();
@@ -2848,9 +2862,79 @@
           currentBtn.classList.remove('playing');
           currentBtn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>';
         }
+        if (currentAnimationId) {
+          cancelAnimationFrame(currentAnimationId);
+          currentAnimationId = null;
+        }
         currentAudio = null;
         currentBtn = null;
       }
+    }
+
+    // Audio visualization
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const playerAnalysers = new Map();
+
+    function setupVisualizer(audio, canvas, src) {
+      if (playerAnalysers.has(src)) return playerAnalysers.get(src);
+
+      const source = audioContext.createMediaElementSource(audio);
+      const analyser = audioContext.createAnalyser();
+      analyser.fftSize = 256;
+      source.connect(analyser);
+      analyser.connect(audioContext.destination);
+
+      playerAnalysers.set(src, { analyser, canvas });
+      return { analyser, canvas };
+    }
+
+    function drawVisualizer(analyser, canvas, isPlaying) {
+      const ctx = canvas.getContext('2d');
+      const width = canvas.width;
+      const height = canvas.height;
+      const bufferLength = analyser.frequencyBinCount;
+      const dataArray = new Uint8Array(bufferLength);
+
+      const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#6366f1';
+
+      function draw() {
+        if (!isPlaying()) {
+          ctx.clearRect(0, 0, width, height);
+          ctx.fillStyle = 'rgba(99, 102, 241, 0.1)';
+          const barWidth = width / 32;
+          for (let i = 0; i < 32; i++) {
+            const barHeight = 4 + Math.random() * 4;
+            ctx.fillRect(i * barWidth + 2, (height - barHeight) / 2, barWidth - 4, barHeight);
+          }
+          return;
+        }
+
+        currentAnimationId = requestAnimationFrame(draw);
+        analyser.getByteFrequencyData(dataArray);
+
+        ctx.clearRect(0, 0, width, height);
+
+        const barWidth = width / 32;
+        const scale = height / 256;
+
+        for (let i = 0; i < 32; i++) {
+          const value = dataArray[i * 2];
+          const barHeight = Math.max(4, value * scale * 0.8);
+          const x = i * barWidth;
+          const y = (height - barHeight) / 2;
+
+          const gradient = ctx.createLinearGradient(0, y, 0, y + barHeight);
+          gradient.addColorStop(0, accentColor);
+          gradient.addColorStop(1, 'rgba(99, 102, 241, 0.4)');
+
+          ctx.fillStyle = gradient;
+          ctx.beginPath();
+          ctx.roundRect(x + 2, y, barWidth - 4, barHeight, 2);
+          ctx.fill();
+        }
+      }
+
+      draw();
     }
 
     // Standard audio players
@@ -2860,11 +2944,29 @@
       const progressFill = player.querySelector('.progress-fill');
       const progressBar = player.querySelector('.progress-bar');
       const timeDisplay = player.querySelector('.audio-time');
+      const canvas = player.querySelector('.audio-visualizer');
       let audio = null;
+      let visualizerSetup = null;
+
+      // Draw static visualizer initially
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = 'rgba(99, 102, 241, 0.15)';
+        const barWidth = canvas.width / 32;
+        for (let i = 0; i < 32; i++) {
+          const barHeight = 4 + Math.sin(i * 0.5) * 6 + 4;
+          ctx.fillRect(i * barWidth + 2, (canvas.height - barHeight) / 2, barWidth - 4, barHeight);
+        }
+      }
 
       btn.addEventListener('click', () => {
+        if (audioContext.state === 'suspended') {
+          audioContext.resume();
+        }
+
         if (!audio) {
           audio = new Audio(src);
+          audio.crossOrigin = 'anonymous';
           audio.addEventListener('loadedmetadata', () => {
             timeDisplay.textContent = formatTime(audio.duration);
           });
@@ -2878,6 +2980,10 @@
             btn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>';
             progressFill.style.width = '0%';
             timeDisplay.textContent = formatTime(audio.duration);
+            if (currentAnimationId) {
+              cancelAnimationFrame(currentAnimationId);
+              currentAnimationId = null;
+            }
             currentAudio = null;
             currentBtn = null;
           });
@@ -2893,10 +2999,22 @@
           btn.innerHTML = '<svg viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
           currentAudio = audio;
           currentBtn = btn;
+
+          // Setup and start visualizer
+          if (canvas && !visualizerSetup) {
+            visualizerSetup = setupVisualizer(audio, canvas, src);
+          }
+          if (visualizerSetup) {
+            drawVisualizer(visualizerSetup.analyser, canvas, () => !audio.paused);
+          }
         } else {
           audio.pause();
           btn.classList.remove('playing');
           btn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>';
+          if (currentAnimationId) {
+            cancelAnimationFrame(currentAnimationId);
+            currentAnimationId = null;
+          }
           currentAudio = null;
           currentBtn = null;
         }
