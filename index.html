@@ -2851,8 +2851,8 @@
       return `${mins}:${secs.toString().padStart(2, '0')}`;
     }
 
-    let currentVisualizer = null;
     let currentAnimationId = null;
+    let currentCanvas = null;
 
     function stopCurrentAudio() {
       if (currentAudio) {
@@ -2866,66 +2866,57 @@
           cancelAnimationFrame(currentAnimationId);
           currentAnimationId = null;
         }
+        if (currentCanvas) {
+          drawStaticBars(currentCanvas);
+          currentCanvas = null;
+        }
         currentAudio = null;
         currentBtn = null;
       }
     }
 
-    // Audio visualization
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    const playerAnalysers = new Map();
-
-    function setupVisualizer(audio, canvas, src) {
-      if (playerAnalysers.has(src)) return playerAnalysers.get(src);
-
-      const source = audioContext.createMediaElementSource(audio);
-      const analyser = audioContext.createAnalyser();
-      analyser.fftSize = 256;
-      source.connect(analyser);
-      analyser.connect(audioContext.destination);
-
-      playerAnalysers.set(src, { analyser, canvas });
-      return { analyser, canvas };
-    }
-
-    function drawVisualizer(analyser, canvas, isPlaying) {
+    // Simple animated visualizer (no Web Audio API needed)
+    function drawStaticBars(canvas) {
       const ctx = canvas.getContext('2d');
       const width = canvas.width;
       const height = canvas.height;
-      const bufferLength = analyser.frequencyBinCount;
-      const dataArray = new Uint8Array(bufferLength);
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = 'rgba(99, 102, 241, 0.15)';
+      const barWidth = width / 32;
+      for (let i = 0; i < 32; i++) {
+        const barHeight = 4 + Math.sin(i * 0.5) * 6 + 4;
+        ctx.fillRect(i * barWidth + 2, (height - barHeight) / 2, barWidth - 4, barHeight);
+      }
+    }
 
-      const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#6366f1';
+    function drawAnimatedBars(canvas, isPlaying) {
+      const ctx = canvas.getContext('2d');
+      const width = canvas.width;
+      const height = canvas.height;
+      let frame = 0;
 
       function draw() {
         if (!isPlaying()) {
-          ctx.clearRect(0, 0, width, height);
-          ctx.fillStyle = 'rgba(99, 102, 241, 0.1)';
-          const barWidth = width / 32;
-          for (let i = 0; i < 32; i++) {
-            const barHeight = 4 + Math.random() * 4;
-            ctx.fillRect(i * barWidth + 2, (height - barHeight) / 2, barWidth - 4, barHeight);
-          }
+          drawStaticBars(canvas);
           return;
         }
 
         currentAnimationId = requestAnimationFrame(draw);
-        analyser.getByteFrequencyData(dataArray);
-
         ctx.clearRect(0, 0, width, height);
 
         const barWidth = width / 32;
-        const scale = height / 256;
+        frame += 0.15;
 
         for (let i = 0; i < 32; i++) {
-          const value = dataArray[i * 2];
-          const barHeight = Math.max(4, value * scale * 0.8);
+          const wave = Math.sin(frame + i * 0.3) * 0.5 + 0.5;
+          const bounce = Math.sin(frame * 2 + i * 0.5) * 0.3 + 0.7;
+          const barHeight = 6 + wave * bounce * 24;
           const x = i * barWidth;
           const y = (height - barHeight) / 2;
 
           const gradient = ctx.createLinearGradient(0, y, 0, y + barHeight);
-          gradient.addColorStop(0, accentColor);
-          gradient.addColorStop(1, 'rgba(99, 102, 241, 0.4)');
+          gradient.addColorStop(0, '#6366f1');
+          gradient.addColorStop(1, 'rgba(99, 102, 241, 0.3)');
 
           ctx.fillStyle = gradient;
           ctx.beginPath();
@@ -2946,27 +2937,15 @@
       const timeDisplay = player.querySelector('.audio-time');
       const canvas = player.querySelector('.audio-visualizer');
       let audio = null;
-      let visualizerSetup = null;
 
       // Draw static visualizer initially
       if (canvas) {
-        const ctx = canvas.getContext('2d');
-        ctx.fillStyle = 'rgba(99, 102, 241, 0.15)';
-        const barWidth = canvas.width / 32;
-        for (let i = 0; i < 32; i++) {
-          const barHeight = 4 + Math.sin(i * 0.5) * 6 + 4;
-          ctx.fillRect(i * barWidth + 2, (canvas.height - barHeight) / 2, barWidth - 4, barHeight);
-        }
+        drawStaticBars(canvas);
       }
 
       btn.addEventListener('click', () => {
-        if (audioContext.state === 'suspended') {
-          audioContext.resume();
-        }
-
         if (!audio) {
           audio = new Audio(src);
-          audio.crossOrigin = 'anonymous';
           audio.addEventListener('loadedmetadata', () => {
             timeDisplay.textContent = formatTime(audio.duration);
           });
@@ -2984,6 +2963,8 @@
               cancelAnimationFrame(currentAnimationId);
               currentAnimationId = null;
             }
+            if (canvas) drawStaticBars(canvas);
+            currentCanvas = null;
             currentAudio = null;
             currentBtn = null;
           });
@@ -2999,13 +2980,11 @@
           btn.innerHTML = '<svg viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
           currentAudio = audio;
           currentBtn = btn;
+          currentCanvas = canvas;
 
-          // Setup and start visualizer
-          if (canvas && !visualizerSetup) {
-            visualizerSetup = setupVisualizer(audio, canvas, src);
-          }
-          if (visualizerSetup) {
-            drawVisualizer(visualizerSetup.analyser, canvas, () => !audio.paused);
+          // Start animated visualizer
+          if (canvas) {
+            drawAnimatedBars(canvas, () => !audio.paused);
           }
         } else {
           audio.pause();
@@ -3015,6 +2994,8 @@
             cancelAnimationFrame(currentAnimationId);
             currentAnimationId = null;
           }
+          if (canvas) drawStaticBars(canvas);
+          currentCanvas = null;
           currentAudio = null;
           currentBtn = null;
         }
