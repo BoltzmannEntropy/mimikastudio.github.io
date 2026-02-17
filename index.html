@@ -457,15 +457,15 @@
     /* ===== Hero Screenshot ===== */
     .hero-screenshot {
       position: relative;
-      max-width: 100%;
-      margin: 0;
+      max-width: 120%;
+      margin: 0 -10%;
       border-radius: var(--radius-lg);
       overflow: hidden;
       border: 1px solid var(--border);
       box-shadow:
         0 0 0 1px rgba(0, 0, 0, 0.02),
-        0 24px 80px rgba(0, 0, 0, 0.08),
-        0 0 60px rgba(99, 102, 241, 0.06);
+        0 32px 100px rgba(0, 0, 0, 0.12),
+        0 0 80px rgba(99, 102, 241, 0.08);
       z-index: 1;
     }
 
@@ -473,6 +473,66 @@
       width: 100%;
       height: auto;
       display: block;
+    }
+
+    /* macOS Window Chrome */
+    .hero-screenshot.macos-window {
+      background: var(--bg-card);
+      border-radius: 12px;
+    }
+
+    .macos-titlebar {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      background: linear-gradient(180deg, #f6f6f6 0%, #e8e8e8 100%);
+      border-bottom: 1px solid #d4d4d4;
+      position: relative;
+    }
+
+    [data-theme="dark"] .macos-titlebar {
+      background: linear-gradient(180deg, #3d3d3d 0%, #2d2d2d 100%);
+      border-bottom-color: #1a1a1a;
+    }
+
+    .macos-buttons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .macos-btn {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      display: block;
+    }
+
+    .macos-btn.close {
+      background: #ff5f57;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+    }
+
+    .macos-btn.minimize {
+      background: #febc2e;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+    }
+
+    .macos-btn.maximize {
+      background: #28c840;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+    }
+
+    .macos-title {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 13px;
+      font-weight: 500;
+      color: #4d4d4d;
+    }
+
+    [data-theme="dark"] .macos-title {
+      color: #b0b0b0;
     }
 
     /* ===== Model Carousel ===== */
@@ -1489,6 +1549,253 @@
     align-items: flex-start;
   }
 }
+
+    /* ===== Audio Samples Section ===== */
+    .samples-section {
+      padding: 120px 0;
+      background: var(--bg-subtle);
+    }
+
+    .samples-model-group {
+      margin-bottom: 48px;
+    }
+
+    .samples-model-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .samples-model-header {
+      margin-bottom: 24px;
+    }
+
+    .samples-model-header h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .samples-model-header h3 .model-icon {
+      font-size: 24px;
+    }
+
+    .samples-model-header p {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .samples-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .sample-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+
+    .sample-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+      border-color: var(--border-hover);
+    }
+
+    .sample-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .sample-card-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .sample-card-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    /* Simple audio player (Kokoro) */
+    .audio-player {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .play-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+      flex-shrink: 0;
+    }
+
+    .play-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
+    }
+
+    .play-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: #ffffff;
+      margin-left: 2px;
+    }
+
+    .play-btn.playing svg {
+      margin-left: 0;
+    }
+
+    .audio-progress {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--accent);
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    .audio-time {
+      font-size: 11px;
+      color: var(--text-dim);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Comparison card (voice cloning) */
+    .sample-card-comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .comparison-side {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .comparison-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-dim);
+    }
+
+    .comparison-label.reference {
+      color: var(--text-muted);
+    }
+
+    .comparison-label.generated {
+      color: var(--accent);
+    }
+
+    .mini-player {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background: var(--bg-subtle);
+      border-radius: 8px;
+    }
+
+    .mini-play-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s;
+      flex-shrink: 0;
+    }
+
+    .mini-play-btn:hover {
+      transform: scale(1.08);
+    }
+
+    .mini-play-btn svg {
+      width: 12px;
+      height: 12px;
+      fill: #ffffff;
+      margin-left: 1px;
+    }
+
+    .mini-play-btn.playing svg {
+      margin-left: 0;
+    }
+
+    .mini-play-btn.reference-btn {
+      background: var(--text-muted);
+    }
+
+    .mini-progress {
+      flex: 1;
+      height: 3px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .mini-progress-fill {
+      height: 100%;
+      background: var(--accent);
+      width: 0%;
+    }
+
+    .mini-progress-fill.reference-fill {
+      background: var(--text-muted);
+    }
+
+    @media (max-width: 1024px) {
+      .samples-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .samples-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sample-card-comparison {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1625,10 +1932,310 @@
         </p>
       </div>
 
-      <!-- Hero Screenshot -->
-      <div class="hero-screenshot reveal reveal-d4">
+      <!-- Hero Screenshot with macOS Window Chrome -->
+      <div class="hero-screenshot macos-window reveal reveal-d4">
+        <div class="macos-titlebar">
+          <div class="macos-buttons">
+            <span class="macos-btn close"></span>
+            <span class="macos-btn minimize"></span>
+            <span class="macos-btn maximize"></span>
+          </div>
+          <span class="macos-title">MimikaStudio</span>
+        </div>
         <img src="images/04-mimikastudio.png" alt="MimikaStudio - PDF Reader and Audiobook Creator" loading="lazy">
       </div>
+    </div>
+  </section>
+
+  <!-- Audio Samples Section -->
+  <section class="samples-section" id="samples">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label label-gradient">Audio Samples</div>
+        <h2>Hear Mimika in action</h2>
+        <p>Listen to samples generated by each TTS engine. For voice cloning demos, compare the reference voice with the generated output.</p>
+      </div>
+
+      <!-- Kokoro Samples -->
+      <div class="samples-model-group reveal">
+        <div class="samples-model-header">
+          <h3><span class="model-icon">&#127908;</span> Kokoro</h3>
+          <p>Built-in voices with natural prosody. No reference audio needed.</p>
+        </div>
+        <div class="samples-grid">
+          <div class="sample-card">
+            <div class="sample-card-header">
+              <span class="sample-card-title">Emma</span>
+            </div>
+            <p class="sample-card-desc">British Female</p>
+            <div class="audio-player" data-src="audio/kokoro/emma.wav">
+              <button class="play-btn" aria-label="Play">
+                <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+              </button>
+              <div class="audio-progress">
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+                <span class="audio-time">0:00</span>
+              </div>
+            </div>
+          </div>
+          <div class="sample-card">
+            <div class="sample-card-header">
+              <span class="sample-card-title">George</span>
+            </div>
+            <p class="sample-card-desc">British Male</p>
+            <div class="audio-player" data-src="audio/kokoro/george.wav">
+              <button class="play-btn" aria-label="Play">
+                <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+              </button>
+              <div class="audio-progress">
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+                <span class="audio-time">0:00</span>
+              </div>
+            </div>
+          </div>
+          <div class="sample-card">
+            <div class="sample-card-header">
+              <span class="sample-card-title">Lily</span>
+            </div>
+            <p class="sample-card-desc">British Female</p>
+            <div class="audio-player" data-src="audio/kokoro/lily.wav">
+              <button class="play-btn" aria-label="Play">
+                <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+              </button>
+              <div class="audio-progress">
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+                <span class="audio-time">0:00</span>
+              </div>
+            </div>
+          </div>
+          <div class="sample-card">
+            <div class="sample-card-header">
+              <span class="sample-card-title">Daniel</span>
+            </div>
+            <p class="sample-card-desc">British Male</p>
+            <div class="audio-player" data-src="audio/kokoro/daniel.wav">
+              <button class="play-btn" aria-label="Play">
+                <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+              </button>
+              <div class="audio-progress">
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+                <span class="audio-time">0:00</span>
+              </div>
+            </div>
+          </div>
+          <div class="sample-card">
+            <div class="sample-card-header">
+              <span class="sample-card-title">Isabella</span>
+            </div>
+            <p class="sample-card-desc">British Female</p>
+            <div class="audio-player" data-src="audio/kokoro/isabella.wav">
+              <button class="play-btn" aria-label="Play">
+                <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+              </button>
+              <div class="audio-progress">
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+                <span class="audio-time">0:00</span>
+              </div>
+            </div>
+          </div>
+          <div class="sample-card">
+            <div class="sample-card-header">
+              <span class="sample-card-title">Fable</span>
+            </div>
+            <p class="sample-card-desc">British Male</p>
+            <div class="audio-player" data-src="audio/kokoro/fable.wav">
+              <button class="play-btn" aria-label="Play">
+                <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+              </button>
+              <div class="audio-progress">
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+                <span class="audio-time">0:00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Qwen3-TTS Samples -->
+      <div class="samples-model-group reveal">
+        <div class="samples-model-header">
+          <h3><span class="model-icon">&#127911;</span> Qwen3-TTS</h3>
+          <p>Voice cloning from a 3-second sample. Compare the reference voice with the generated output.</p>
+        </div>
+        <div class="samples-grid">
+          <div class="sample-card">
+            <div class="sample-card-header">
+              <span class="sample-card-title">Natasha Clone</span>
+            </div>
+            <p class="sample-card-desc">Genesis4 Style</p>
+            <div class="sample-card-comparison">
+              <div class="comparison-side">
+                <span class="comparison-label reference">Reference</span>
+                <div class="mini-player" data-src="audio/references/natasha.wav">
+                  <button class="mini-play-btn reference-btn" aria-label="Play reference">
+                    <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                  </button>
+                  <div class="mini-progress"><div class="mini-progress-fill reference-fill"></div></div>
+                </div>
+              </div>
+              <div class="comparison-side">
+                <span class="comparison-label generated">Generated</span>
+                <div class="mini-player" data-src="audio/qwen3/natasha-genesis4.wav">
+                  <button class="mini-play-btn" aria-label="Play generated">
+                    <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                  </button>
+                  <div class="mini-progress"><div class="mini-progress-fill"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="sample-card">
+            <div class="sample-card-header">
+              <span class="sample-card-title">Suzan Clone</span>
+            </div>
+            <p class="sample-card-desc">Genesis4 Style</p>
+            <div class="sample-card-comparison">
+              <div class="comparison-side">
+                <span class="comparison-label reference">Reference</span>
+                <div class="mini-player" data-src="audio/references/suzan.wav">
+                  <button class="mini-play-btn reference-btn" aria-label="Play reference">
+                    <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                  </button>
+                  <div class="mini-progress"><div class="mini-progress-fill reference-fill"></div></div>
+                </div>
+              </div>
+              <div class="comparison-side">
+                <span class="comparison-label generated">Generated</span>
+                <div class="mini-player" data-src="audio/qwen3/suzan-genesis4.wav">
+                  <button class="mini-play-btn" aria-label="Play generated">
+                    <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                  </button>
+                  <div class="mini-progress"><div class="mini-progress-fill"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="sample-card">
+            <div class="sample-card-header">
+              <span class="sample-card-title">Aiden</span>
+            </div>
+            <p class="sample-card-desc">Genesis4 Preset Voice</p>
+            <div class="audio-player" data-src="audio/qwen3/aiden-genesis4.wav">
+              <button class="play-btn" aria-label="Play">
+                <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+              </button>
+              <div class="audio-progress">
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+                <span class="audio-time">0:00</span>
+              </div>
+            </div>
+          </div>
+          <div class="sample-card">
+            <div class="sample-card-header">
+              <span class="sample-card-title">Ryan</span>
+            </div>
+            <p class="sample-card-desc">Genesis4 Preset Voice</p>
+            <div class="audio-player" data-src="audio/qwen3/ryan-genesis4.wav">
+              <button class="play-btn" aria-label="Play">
+                <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+              </button>
+              <div class="audio-progress">
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+                <span class="audio-time">0:00</span>
+              </div>
+            </div>
+          </div>
+          <div class="sample-card">
+            <div class="sample-card-header">
+              <span class="sample-card-title">Natasha (Hebrew)</span>
+            </div>
+            <p class="sample-card-desc">Multilingual Demo</p>
+            <div class="sample-card-comparison">
+              <div class="comparison-side">
+                <span class="comparison-label reference">Reference</span>
+                <div class="mini-player" data-src="audio/references/natasha.wav">
+                  <button class="mini-play-btn reference-btn" aria-label="Play reference">
+                    <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                  </button>
+                  <div class="mini-progress"><div class="mini-progress-fill reference-fill"></div></div>
+                </div>
+              </div>
+              <div class="comparison-side">
+                <span class="comparison-label generated">Generated</span>
+                <div class="mini-player" data-src="audio/qwen3/natasha-hebrew.wav">
+                  <button class="mini-play-btn" aria-label="Play generated">
+                    <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                  </button>
+                  <div class="mini-progress"><div class="mini-progress-fill"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ChatterBox Samples -->
+      <div class="samples-model-group reveal">
+        <div class="samples-model-header">
+          <h3><span class="model-icon">&#128172;</span> ChatterBox</h3>
+          <p>Expressive voice cloning with emotion control. Natural, emotive speech synthesis.</p>
+        </div>
+        <div class="samples-grid">
+          <div class="sample-card">
+            <div class="sample-card-header">
+              <span class="sample-card-title">Natasha Clone</span>
+            </div>
+            <p class="sample-card-desc">Emotional Speech Demo</p>
+            <div class="sample-card-comparison">
+              <div class="comparison-side">
+                <span class="comparison-label reference">Reference</span>
+                <div class="mini-player" data-src="audio/references/natasha.wav">
+                  <button class="mini-play-btn reference-btn" aria-label="Play reference">
+                    <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                  </button>
+                  <div class="mini-progress"><div class="mini-progress-fill reference-fill"></div></div>
+                </div>
+              </div>
+              <div class="comparison-side">
+                <span class="comparison-label generated">Generated</span>
+                <div class="mini-player" data-src="audio/chatterbox/natasha-demo.wav">
+                  <button class="mini-play-btn" aria-label="Play generated">
+                    <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                  </button>
+                  <div class="mini-progress"><div class="mini-progress-fill"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="sample-card">
+            <div class="sample-card-header">
+              <span class="sample-card-title">Suzan Clone</span>
+            </div>
+            <p class="sample-card-desc">Emotional Speech Demo</p>
+            <div class="sample-card-comparison">
+              <div class="comparison-side">
+                <span class="comparison-label reference">Reference</span>
+                <div class="mini-player" data-src="audio/references/suzan.wav">
+                  <button class="mini-play-btn reference-btn" aria-label="Play reference">
+                    <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                  </button>
+                  <div class="mini-progress"><div class="mini-progress-fill reference-fill"></div></div>
+                </div>
+              </div>
+              <div class="comparison-side">
+                <span class="comparison-label generated">Generated</span>
+                <div class="mini-player" data-src="audio/chatterbox/suzan-demo.wav">
+                  <button class="mini-play-btn" aria-label="Play generated">
+                    <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                  </button>
+                  <div class="mini-progress"><div class="mini-progress-fill"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -2280,6 +2887,130 @@
         document.documentElement.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
         updateThemeButtons(theme);
+      });
+    });
+
+    // Audio Players
+    let currentAudio = null;
+    let currentBtn = null;
+
+    function formatTime(seconds) {
+      const mins = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60);
+      return `${mins}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    function stopCurrentAudio() {
+      if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+        if (currentBtn) {
+          currentBtn.classList.remove('playing');
+          currentBtn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>';
+        }
+        currentAudio = null;
+        currentBtn = null;
+      }
+    }
+
+    // Standard audio players
+    document.querySelectorAll('.audio-player').forEach(player => {
+      const src = player.dataset.src;
+      const btn = player.querySelector('.play-btn');
+      const progressFill = player.querySelector('.progress-fill');
+      const progressBar = player.querySelector('.progress-bar');
+      const timeDisplay = player.querySelector('.audio-time');
+      let audio = null;
+
+      btn.addEventListener('click', () => {
+        if (!audio) {
+          audio = new Audio(src);
+          audio.addEventListener('loadedmetadata', () => {
+            timeDisplay.textContent = formatTime(audio.duration);
+          });
+          audio.addEventListener('timeupdate', () => {
+            const progress = (audio.currentTime / audio.duration) * 100;
+            progressFill.style.width = progress + '%';
+            timeDisplay.textContent = formatTime(audio.currentTime);
+          });
+          audio.addEventListener('ended', () => {
+            btn.classList.remove('playing');
+            btn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>';
+            progressFill.style.width = '0%';
+            timeDisplay.textContent = formatTime(audio.duration);
+            currentAudio = null;
+            currentBtn = null;
+          });
+        }
+
+        if (currentAudio && currentAudio !== audio) {
+          stopCurrentAudio();
+        }
+
+        if (audio.paused) {
+          audio.play();
+          btn.classList.add('playing');
+          btn.innerHTML = '<svg viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
+          currentAudio = audio;
+          currentBtn = btn;
+        } else {
+          audio.pause();
+          btn.classList.remove('playing');
+          btn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>';
+          currentAudio = null;
+          currentBtn = null;
+        }
+      });
+
+      progressBar.addEventListener('click', (e) => {
+        if (audio && audio.duration) {
+          const rect = progressBar.getBoundingClientRect();
+          const percent = (e.clientX - rect.left) / rect.width;
+          audio.currentTime = percent * audio.duration;
+        }
+      });
+    });
+
+    // Mini audio players
+    document.querySelectorAll('.mini-player').forEach(player => {
+      const src = player.dataset.src;
+      const btn = player.querySelector('.mini-play-btn');
+      const progressFill = player.querySelector('.mini-progress-fill');
+      let audio = null;
+
+      btn.addEventListener('click', () => {
+        if (!audio) {
+          audio = new Audio(src);
+          audio.addEventListener('timeupdate', () => {
+            const progress = (audio.currentTime / audio.duration) * 100;
+            progressFill.style.width = progress + '%';
+          });
+          audio.addEventListener('ended', () => {
+            btn.classList.remove('playing');
+            btn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>';
+            progressFill.style.width = '0%';
+            currentAudio = null;
+            currentBtn = null;
+          });
+        }
+
+        if (currentAudio && currentAudio !== audio) {
+          stopCurrentAudio();
+        }
+
+        if (audio.paused) {
+          audio.play();
+          btn.classList.add('playing');
+          btn.innerHTML = '<svg viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
+          currentAudio = audio;
+          currentBtn = btn;
+        } else {
+          audio.pause();
+          btn.classList.remove('playing');
+          btn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>';
+          currentAudio = null;
+          currentBtn = null;
+        }
       });
     });
   </script>
