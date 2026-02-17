@@ -1565,14 +1565,16 @@
     }
 
     .samples-model-group {
-      margin-bottom: 52px;
-      padding: 28px;
-      border-radius: 30px;
-      border: 1px solid rgba(156, 163, 175, 0.3);
-      background: rgba(255, 255, 255, 0.58);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      margin-bottom: 36px;
+      padding: 18px;
+      border-radius: 20px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.92),
+        0 8px 24px rgba(15, 23, 42, 0.06);
     }
 
     [data-theme="dark"] .samples-model-group {
@@ -1586,11 +1588,11 @@
     }
 
     .samples-model-header {
-      margin-bottom: 24px;
+      margin-bottom: 16px;
     }
 
     .samples-model-header h3 {
-      font-size: 24px;
+      font-size: 21px;
       font-weight: 700;
       letter-spacing: -0.02em;
       color: #1f2937;
@@ -1609,7 +1611,7 @@
     }
 
     .samples-model-header p {
-      font-size: 15px;
+      font-size: 14px;
       color: #667085;
       max-width: 760px;
     }
@@ -1621,20 +1623,20 @@
     .samples-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 20px;
+      gap: 14px;
     }
 
     .sample-card {
       position: relative;
       background:
-        linear-gradient(180deg, rgba(248, 250, 253, 0.96) 0%, rgba(240, 244, 249, 0.98) 100%);
-      border: 1px solid #d7dee8;
-      border-radius: 26px;
-      padding: 24px;
-      min-height: 250px;
+        linear-gradient(180deg, rgba(250, 252, 255, 0.98) 0%, rgba(244, 247, 252, 0.98) 100%);
+      border: 1px solid #d7dfe9;
+      border-radius: 16px;
+      padding: 14px;
+      min-height: 198px;
       box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.95),
-        0 10px 34px rgba(15, 23, 42, 0.08);
+        0 6px 18px rgba(15, 23, 42, 0.06);
       transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     }
 
@@ -1647,11 +1649,11 @@
     }
 
     .sample-card:hover {
-      transform: translateY(-2px);
+      transform: translateY(-1px);
       border-color: #c0cad8;
       box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.95),
-        0 14px 36px rgba(15, 23, 42, 0.12);
+        0 10px 24px rgba(15, 23, 42, 0.1);
     }
 
     [data-theme="dark"] .sample-card:hover {
@@ -1669,12 +1671,12 @@
     }
 
     .sample-card-title {
-      font-size: 34px;
-      line-height: 1.06;
+      font-size: 24px;
+      line-height: 1.12;
       font-weight: 700;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.02em;
       color: #1f2937;
-      max-width: calc(100% - 86px);
+      max-width: calc(100% - 62px);
     }
 
     [data-theme="dark"] .sample-card-title {
@@ -1682,11 +1684,11 @@
     }
 
     .sample-card-desc {
-      font-size: 15px;
-      line-height: 1.4;
+      font-size: 13px;
+      line-height: 1.35;
       color: #6b7280;
-      margin-bottom: 12px;
-      max-width: calc(100% - 86px);
+      margin-bottom: 8px;
+      max-width: calc(100% - 62px);
     }
 
     [data-theme="dark"] .sample-card-desc {
@@ -1696,19 +1698,19 @@
     .sample-badges {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 14px;
-      max-width: calc(100% - 86px);
+      gap: 6px;
+      margin-bottom: 10px;
+      max-width: calc(100% - 62px);
     }
 
     .sample-badge {
       display: inline-flex;
       align-items: center;
-      padding: 4px 11px;
+      padding: 3px 8px;
       border-radius: 100px;
       border: 1px solid #ccd4e0;
       background: rgba(255, 255, 255, 0.86);
-      font-size: 12px;
+      font-size: 11px;
       line-height: 1;
       font-weight: 600;
       color: #4b5563;
@@ -1724,7 +1726,7 @@
       width: 100%;
       height: 1px;
       background: rgba(148, 163, 184, 0.35);
-      margin: 0 0 14px;
+      margin: 0 0 10px;
     }
 
     [data-theme="dark"] .sample-divider {
@@ -1732,11 +1734,11 @@
     }
 
     .sample-card-copy {
-      font-size: 16px;
-      line-height: 1.55;
+      font-size: 14px;
+      line-height: 1.45;
       color: #334155;
-      margin-bottom: 14px;
-      max-width: calc(100% - 86px);
+      margin-bottom: 10px;
+      max-width: calc(100% - 62px);
     }
 
     [data-theme="dark"] .sample-card-copy {
@@ -1753,12 +1755,12 @@
     .sample-engine-pill {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 6px 12px;
-      border-radius: 12px;
+      gap: 6px;
+      padding: 4px 9px;
+      border-radius: 10px;
       border: 1px solid #cfd8e4;
       background: rgba(255, 255, 255, 0.9);
-      font-size: 14px;
+      font-size: 12px;
       font-weight: 600;
       color: #475569;
       margin-top: 2px;
@@ -1783,16 +1785,16 @@
     /* Standard audio players */
     .audio-player {
       position: absolute;
-      top: 22px;
-      right: 22px;
+      top: 12px;
+      right: 12px;
       z-index: 3;
     }
 
     .play-btn {
-      width: 52px;
-      height: 52px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
-      border: 2px solid #3b82f6;
+      border: 1.5px solid #3b82f6;
       background: linear-gradient(180deg, #f6f8fd 0%, #eef3fb 100%);
       cursor: pointer;
       display: flex;
@@ -1800,7 +1802,7 @@
       justify-content: center;
       position: static;
       transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.16);
+      box-shadow: 0 3px 10px rgba(59, 130, 246, 0.14);
       z-index: 2;
     }
 
@@ -1816,8 +1818,8 @@
     }
 
     .play-btn svg {
-      width: 20px;
-      height: 20px;
+      width: 16px;
+      height: 16px;
       fill: #3b82f6;
       margin-left: 2px;
     }
@@ -1874,7 +1876,7 @@
 
     .audio-visualizer {
       width: 100%;
-      height: 44px;
+      height: 30px;
       border-radius: 10px;
       border: 1px solid #d5dce8;
       background: linear-gradient(180deg, rgba(238, 242, 249, 0.95) 0%, rgba(228, 235, 245, 0.95) 100%);
@@ -1890,16 +1892,16 @@
     .sample-card-comparison {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      gap: 8px;
       margin-top: 6px;
     }
 
     .comparison-side {
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      padding: 10px;
-      border-radius: 14px;
+      gap: 6px;
+      padding: 8px;
+      border-radius: 10px;
       border: 1px solid #d6dce6;
       background: rgba(255, 255, 255, 0.76);
     }
@@ -1910,7 +1912,7 @@
     }
 
     .comparison-label {
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.06em;
@@ -1938,8 +1940,8 @@
     }
 
     .mini-play-btn {
-      width: 34px;
-      height: 34px;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
       border: 2px solid #3b82f6;
       background: linear-gradient(180deg, #f6f8fd 0%, #eef3fb 100%);
@@ -1962,8 +1964,8 @@
     }
 
     .mini-play-btn svg {
-      width: 13px;
-      height: 13px;
+      width: 11px;
+      height: 11px;
       fill: #3b82f6;
       margin-left: 1px;
     }
@@ -2009,7 +2011,7 @@
 
     @media (max-width: 1180px) {
       .sample-card-title {
-        font-size: 30px;
+        font-size: 22px;
       }
     }
 
@@ -2029,22 +2031,22 @@
       .sample-card-title,
       .sample-card-desc,
       .sample-badges {
-        max-width: calc(100% - 86px);
+        max-width: calc(100% - 62px);
       }
     }
 
     @media (max-width: 640px) {
       .samples-model-group {
-        padding: 18px;
+        padding: 14px;
       }
 
       .sample-card {
-        border-radius: 22px;
-        padding: 18px;
+        border-radius: 14px;
+        padding: 12px;
       }
 
       .sample-card-title {
-        font-size: 28px;
+        font-size: 20px;
       }
 
       .sample-card-comparison {
@@ -2052,8 +2054,8 @@
       }
 
       .play-btn {
-        width: 46px;
-        height: 46px;
+        width: 36px;
+        height: 36px;
       }
     }
   </style>
@@ -2288,6 +2290,66 @@
             <p class="sample-card-copy">Warm and expressive tone with subtle emphasis on key phrases for <span class="accent">natural spoken prose</span>.</p>
             <span class="sample-engine-pill">Kokoro</span>
             <div class="audio-player" data-src="audio/kokoro/lily.wav">
+              <button class="play-btn" aria-label="Play">
+                <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+              </button>
+              <div class="audio-progress">
+                <canvas class="audio-visualizer" width="200" height="40"></canvas>
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+                <span class="audio-time">0:00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Supertonic Samples -->
+      <div class="samples-model-group reveal">
+        <div class="samples-model-header">
+          <h3><span class="model-icon">&#9889;</span> Supertonic</h3>
+          <p>Fast multilingual ONNX synthesis. Instant playback from bundled pre-generated voices.</p>
+        </div>
+        <div class="samples-grid">
+          <div class="sample-card">
+            <div class="sample-card-header">
+              <span class="sample-card-title">F1</span>
+            </div>
+            <p class="sample-card-desc">Genesis 4 Preview</p>
+            <div class="sample-badges">
+              <span class="sample-badge">Supertonic</span>
+              <span class="sample-badge">Local</span>
+              <span class="sample-badge">English</span>
+              <span class="sample-badge">ONNX Runtime</span>
+            </div>
+            <div class="sample-divider"></div>
+            <p class="sample-card-copy">Clear high-register narration tuned for scripture-style reading with <span class="accent">quick response time</span>.</p>
+            <span class="sample-engine-pill">Supertonic</span>
+            <div class="audio-player" data-src="audio/supertonic/supertonic-f1-genesis4-demo.wav">
+              <button class="play-btn" aria-label="Play">
+                <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+              </button>
+              <div class="audio-progress">
+                <canvas class="audio-visualizer" width="200" height="40"></canvas>
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+                <span class="audio-time">0:00</span>
+              </div>
+            </div>
+          </div>
+          <div class="sample-card">
+            <div class="sample-card-header">
+              <span class="sample-card-title">M2</span>
+            </div>
+            <p class="sample-card-desc">Deterrence Brief</p>
+            <div class="sample-badges">
+              <span class="sample-badge">Supertonic</span>
+              <span class="sample-badge">Local</span>
+              <span class="sample-badge">English</span>
+              <span class="sample-badge">Policy Tone</span>
+            </div>
+            <div class="sample-divider"></div>
+            <p class="sample-card-copy">Lower register delivery for analytical narration and strategic commentary with <span class="accent">stable pacing</span>.</p>
+            <span class="sample-engine-pill">Supertonic</span>
+            <div class="audio-player" data-src="audio/supertonic/supertonic-m2-geopolitics-demo.wav">
               <button class="play-btn" aria-label="Play">
                 <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
               </button>
