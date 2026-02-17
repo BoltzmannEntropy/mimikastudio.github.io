@@ -1553,11 +1553,32 @@
     /* ===== Audio Samples Section ===== */
     .samples-section {
       padding: 120px 0;
-      background: var(--bg-subtle);
+      background:
+        radial-gradient(1300px 520px at 0% -10%, rgba(255, 255, 255, 0.9) 0%, rgba(247, 250, 255, 0.85) 40%, rgba(238, 242, 248, 0.9) 100%),
+        linear-gradient(180deg, #eff3f8 0%, #ebeff5 52%, #f4f7fb 100%);
+    }
+
+    [data-theme="dark"] .samples-section {
+      background:
+        radial-gradient(1000px 420px at 0% -10%, rgba(71, 85, 105, 0.2) 0%, rgba(30, 41, 59, 0.28) 55%, rgba(15, 23, 42, 0.42) 100%),
+        linear-gradient(180deg, #111a2b 0%, #0f172a 52%, #162033 100%);
     }
 
     .samples-model-group {
-      margin-bottom: 48px;
+      margin-bottom: 52px;
+      padding: 28px;
+      border-radius: 30px;
+      border: 1px solid rgba(156, 163, 175, 0.3);
+      background: rgba(255, 255, 255, 0.58);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    [data-theme="dark"] .samples-model-group {
+      border-color: rgba(100, 116, 139, 0.55);
+      background: rgba(17, 24, 39, 0.64);
+      box-shadow: inset 0 1px 0 rgba(148, 163, 184, 0.1);
     }
 
     .samples-model-group:last-child {
@@ -1569,13 +1590,18 @@
     }
 
     .samples-model-header h3 {
-      font-size: 20px;
+      font-size: 24px;
       font-weight: 700;
-      color: var(--text);
-      margin-bottom: 4px;
+      letter-spacing: -0.02em;
+      color: #1f2937;
+      margin-bottom: 6px;
       display: flex;
       align-items: center;
       gap: 10px;
+    }
+
+    [data-theme="dark"] .samples-model-header h3 {
+      color: #f8fafc;
     }
 
     .samples-model-header h3 .model-icon {
@@ -1583,80 +1609,221 @@
     }
 
     .samples-model-header p {
-      font-size: 14px;
-      color: var(--text-muted);
+      font-size: 15px;
+      color: #667085;
+      max-width: 760px;
+    }
+
+    [data-theme="dark"] .samples-model-header p {
+      color: #94a3b8;
     }
 
     .samples-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
     }
 
     .sample-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px;
-      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      position: relative;
+      background:
+        linear-gradient(180deg, rgba(248, 250, 253, 0.96) 0%, rgba(240, 244, 249, 0.98) 100%);
+      border: 1px solid #d7dee8;
+      border-radius: 26px;
+      padding: 24px;
+      min-height: 250px;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.95),
+        0 10px 34px rgba(15, 23, 42, 0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    [data-theme="dark"] .sample-card {
+      background: linear-gradient(180deg, rgba(30, 41, 59, 0.88) 0%, rgba(15, 23, 42, 0.95) 100%);
+      border-color: #334155;
+      box-shadow:
+        inset 0 1px 0 rgba(148, 163, 184, 0.08),
+        0 10px 26px rgba(2, 6, 23, 0.4);
     }
 
     .sample-card:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
-      border-color: var(--border-hover);
+      border-color: #c0cad8;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.95),
+        0 14px 36px rgba(15, 23, 42, 0.12);
+    }
+
+    [data-theme="dark"] .sample-card:hover {
+      border-color: #475569;
+      box-shadow:
+        inset 0 1px 0 rgba(148, 163, 184, 0.12),
+        0 14px 34px rgba(2, 6, 23, 0.48);
     }
 
     .sample-card-header {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
-      margin-bottom: 8px;
+      margin-bottom: 4px;
     }
 
     .sample-card-title {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--text);
+      font-size: 34px;
+      line-height: 1.06;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: #1f2937;
+      max-width: calc(100% - 86px);
+    }
+
+    [data-theme="dark"] .sample-card-title {
+      color: #f8fafc;
     }
 
     .sample-card-desc {
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-bottom: 16px;
+      font-size: 15px;
+      line-height: 1.4;
+      color: #6b7280;
+      margin-bottom: 12px;
+      max-width: calc(100% - 86px);
     }
 
-    /* Simple audio player (Kokoro) */
-    .audio-player {
+    [data-theme="dark"] .sample-card-desc {
+      color: #94a3b8;
+    }
+
+    .sample-badges {
       display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+      max-width: calc(100% - 86px);
+    }
+
+    .sample-badge {
+      display: inline-flex;
       align-items: center;
-      gap: 12px;
+      padding: 4px 11px;
+      border-radius: 100px;
+      border: 1px solid #ccd4e0;
+      background: rgba(255, 255, 255, 0.86);
+      font-size: 12px;
+      line-height: 1;
+      font-weight: 600;
+      color: #4b5563;
+    }
+
+    [data-theme="dark"] .sample-badge {
+      background: rgba(30, 41, 59, 0.82);
+      border-color: #475569;
+      color: #d1d5db;
+    }
+
+    .sample-divider {
+      width: 100%;
+      height: 1px;
+      background: rgba(148, 163, 184, 0.35);
+      margin: 0 0 14px;
+    }
+
+    [data-theme="dark"] .sample-divider {
+      background: rgba(100, 116, 139, 0.7);
+    }
+
+    .sample-card-copy {
+      font-size: 16px;
+      line-height: 1.55;
+      color: #334155;
+      margin-bottom: 14px;
+      max-width: calc(100% - 86px);
+    }
+
+    [data-theme="dark"] .sample-card-copy {
+      color: #cbd5e1;
+    }
+
+    .sample-card-copy .accent {
+      color: #3b82f6;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+    }
+
+    .sample-engine-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 12px;
+      border: 1px solid #cfd8e4;
+      background: rgba(255, 255, 255, 0.9);
+      font-size: 14px;
+      font-weight: 600;
+      color: #475569;
+      margin-top: 2px;
+    }
+
+    [data-theme="dark"] .sample-engine-pill {
+      background: rgba(30, 41, 59, 0.9);
+      border-color: #475569;
+      color: #d1d5db;
+    }
+
+    .sample-engine-pill::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+      flex-shrink: 0;
+    }
+
+    /* Standard audio players */
+    .audio-player {
+      position: absolute;
+      top: 22px;
+      right: 22px;
+      z-index: 3;
     }
 
     .play-btn {
-      width: 44px;
-      height: 44px;
+      width: 52px;
+      height: 52px;
       border-radius: 50%;
-      background: var(--accent);
-      border: none;
+      border: 2px solid #3b82f6;
+      background: linear-gradient(180deg, #f6f8fd 0%, #eef3fb 100%);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.2s, box-shadow 0.2s;
-      flex-shrink: 0;
+      position: static;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.16);
+      z-index: 2;
+    }
+
+    [data-theme="dark"] .play-btn {
+      background: linear-gradient(180deg, #1e293b 0%, #111827 100%);
+      border-color: #60a5fa;
+      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.28);
     }
 
     .play-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
+      transform: scale(1.04);
+      box-shadow: 0 8px 18px rgba(59, 130, 246, 0.25);
     }
 
     .play-btn svg {
-      width: 18px;
-      height: 18px;
-      fill: #ffffff;
+      width: 20px;
+      height: 20px;
+      fill: #3b82f6;
       margin-left: 2px;
+    }
+
+    [data-theme="dark"] .play-btn svg {
+      fill: #60a5fa;
     }
 
     .play-btn.playing svg {
@@ -1664,103 +1831,145 @@
     }
 
     .audio-progress {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
     }
 
     .progress-bar {
       width: 100%;
-      height: 4px;
-      background: var(--border);
-      border-radius: 2px;
+      height: 6px;
+      background: #d5dce8;
+      border-radius: 999px;
       overflow: hidden;
       cursor: pointer;
     }
 
+    [data-theme="dark"] .progress-bar {
+      background: #334155;
+    }
+
     .progress-fill {
       height: 100%;
-      background: var(--accent);
+      background: linear-gradient(90deg, #2563eb, #60a5fa);
       width: 0%;
       transition: width 0.1s linear;
     }
 
     .audio-time {
-      font-size: 11px;
-      color: var(--text-dim);
+      font-size: 12px;
+      color: #64748b;
       font-variant-numeric: tabular-nums;
+    }
+
+    [data-theme="dark"] .audio-time {
+      color: #94a3b8;
     }
 
     .audio-visualizer {
       width: 100%;
-      height: 40px;
-      border-radius: 6px;
-      background: var(--bg-subtle);
-      margin-bottom: 6px;
+      height: 44px;
+      border-radius: 10px;
+      border: 1px solid #d5dce8;
+      background: linear-gradient(180deg, rgba(238, 242, 249, 0.95) 0%, rgba(228, 235, 245, 0.95) 100%);
+      margin-bottom: 4px;
+    }
+
+    [data-theme="dark"] .audio-visualizer {
+      border-color: #334155;
+      background: linear-gradient(180deg, rgba(30, 41, 59, 0.9) 0%, rgba(17, 24, 39, 0.9) 100%);
     }
 
     /* Comparison card (voice cloning) */
     .sample-card-comparison {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 16px;
+      gap: 12px;
+      margin-top: 6px;
     }
 
     .comparison-side {
       display: flex;
       flex-direction: column;
       gap: 8px;
+      padding: 10px;
+      border-radius: 14px;
+      border: 1px solid #d6dce6;
+      background: rgba(255, 255, 255, 0.76);
+    }
+
+    [data-theme="dark"] .comparison-side {
+      border-color: #334155;
+      background: rgba(15, 23, 42, 0.86);
     }
 
     .comparison-label {
       font-size: 11px;
-      font-weight: 600;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--text-dim);
+      letter-spacing: 0.06em;
+      color: #64748b;
+    }
+
+    [data-theme="dark"] .comparison-label {
+      color: #94a3b8;
     }
 
     .comparison-label.reference {
-      color: var(--text-muted);
+      color: #64748b;
     }
 
     .comparison-label.generated {
-      color: var(--accent);
+      color: #2563eb;
     }
 
     .mini-player {
       display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      background: var(--bg-subtle);
-      border-radius: 8px;
+      gap: 10px;
+      padding: 0;
+      background: transparent;
     }
 
     .mini-play-btn {
-      width: 32px;
-      height: 32px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
-      background: var(--accent);
-      border: none;
+      border: 2px solid #3b82f6;
+      background: linear-gradient(180deg, #f6f8fd 0%, #eef3fb 100%);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.2s;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 3px 10px rgba(59, 130, 246, 0.16);
       flex-shrink: 0;
     }
 
+    [data-theme="dark"] .mini-play-btn {
+      background: linear-gradient(180deg, #1e293b 0%, #111827 100%);
+      border-color: #60a5fa;
+    }
+
     .mini-play-btn:hover {
-      transform: scale(1.08);
+      transform: scale(1.06);
     }
 
     .mini-play-btn svg {
-      width: 12px;
-      height: 12px;
-      fill: #ffffff;
+      width: 13px;
+      height: 13px;
+      fill: #3b82f6;
       margin-left: 1px;
+    }
+
+    [data-theme="dark"] .mini-play-btn svg {
+      fill: #60a5fa;
     }
 
     .mini-play-btn.playing svg {
@@ -1768,40 +1977,83 @@
     }
 
     .mini-play-btn.reference-btn {
-      background: var(--text-muted);
+      border-color: #94a3b8;
+      box-shadow: 0 3px 10px rgba(100, 116, 139, 0.2);
+    }
+
+    [data-theme="dark"] .mini-play-btn.reference-btn {
+      border-color: #94a3b8;
     }
 
     .mini-progress {
       flex: 1;
-      height: 3px;
-      background: var(--border);
-      border-radius: 2px;
+      height: 4px;
+      background: #d5dce8;
+      border-radius: 999px;
       overflow: hidden;
+    }
+
+    [data-theme="dark"] .mini-progress {
+      background: #334155;
     }
 
     .mini-progress-fill {
       height: 100%;
-      background: var(--accent);
+      background: linear-gradient(90deg, #2563eb, #60a5fa);
       width: 0%;
     }
 
     .mini-progress-fill.reference-fill {
-      background: var(--text-muted);
+      background: linear-gradient(90deg, #94a3b8, #cbd5e1);
+    }
+
+    @media (max-width: 1180px) {
+      .sample-card-title {
+        font-size: 30px;
+      }
     }
 
     @media (max-width: 1024px) {
+      .samples-model-group {
+        padding: 22px;
+      }
+
       .samples-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
+      }
+
+      .sample-card {
+        min-height: 0;
+      }
+
+      .sample-card-title,
+      .sample-card-desc,
+      .sample-badges {
+        max-width: calc(100% - 86px);
       }
     }
 
     @media (max-width: 640px) {
-      .samples-grid {
-        grid-template-columns: 1fr;
+      .samples-model-group {
+        padding: 18px;
+      }
+
+      .sample-card {
+        border-radius: 22px;
+        padding: 18px;
+      }
+
+      .sample-card-title {
+        font-size: 28px;
       }
 
       .sample-card-comparison {
         grid-template-columns: 1fr;
+      }
+
+      .play-btn {
+        width: 46px;
+        height: 46px;
       }
     }
   </style>
@@ -1976,6 +2228,15 @@
               <span class="sample-card-title">Emma</span>
             </div>
             <p class="sample-card-desc">Job 6:1-2 &middot; British Female</p>
+            <div class="sample-badges">
+              <span class="sample-badge">Kokoro</span>
+              <span class="sample-badge">Local</span>
+              <span class="sample-badge">English</span>
+              <span class="sample-badge">Narration</span>
+            </div>
+            <div class="sample-divider"></div>
+            <p class="sample-card-copy">Balanced pacing and crisp articulation for long-form reading with <span class="accent">book-like clarity</span>.</p>
+            <span class="sample-engine-pill">Kokoro</span>
             <div class="audio-player" data-src="audio/kokoro/emma.wav">
               <button class="play-btn" aria-label="Play">
                 <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
@@ -1992,6 +2253,15 @@
               <span class="sample-card-title">George</span>
             </div>
             <p class="sample-card-desc">Job 14:7 &middot; British Male</p>
+            <div class="sample-badges">
+              <span class="sample-badge">Kokoro</span>
+              <span class="sample-badge">Local</span>
+              <span class="sample-badge">English</span>
+              <span class="sample-badge">Narration</span>
+            </div>
+            <div class="sample-divider"></div>
+            <p class="sample-card-copy">Lower-register delivery with stable rhythm suited for <span class="accent">document narration</span> and reports.</p>
+            <span class="sample-engine-pill">Kokoro</span>
             <div class="audio-player" data-src="audio/kokoro/george.wav">
               <button class="play-btn" aria-label="Play">
                 <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
@@ -2008,6 +2278,15 @@
               <span class="sample-card-title">Lily</span>
             </div>
             <p class="sample-card-desc">Job 42:5-6 &middot; British Female</p>
+            <div class="sample-badges">
+              <span class="sample-badge">Kokoro</span>
+              <span class="sample-badge">Local</span>
+              <span class="sample-badge">English</span>
+              <span class="sample-badge">Narration</span>
+            </div>
+            <div class="sample-divider"></div>
+            <p class="sample-card-copy">Warm and expressive tone with subtle emphasis on key phrases for <span class="accent">natural spoken prose</span>.</p>
+            <span class="sample-engine-pill">Kokoro</span>
             <div class="audio-player" data-src="audio/kokoro/lily.wav">
               <button class="play-btn" aria-label="Play">
                 <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
@@ -2034,6 +2313,14 @@
               <span class="sample-card-title">Natasha Clone</span>
             </div>
             <p class="sample-card-desc">Genesis4 Style</p>
+            <div class="sample-badges">
+              <span class="sample-badge">Qwen3-TTS</span>
+              <span class="sample-badge">Voice Clone</span>
+              <span class="sample-badge">23 Languages</span>
+              <span class="sample-badge">Style Prompt</span>
+            </div>
+            <div class="sample-divider"></div>
+            <p class="sample-card-copy">Generated speech keeps the reference timbre while applying <span class="accent">Genesis4 style control</span>.</p>
             <div class="sample-card-comparison">
               <div class="comparison-side">
                 <span class="comparison-label reference">Reference</span>
@@ -2054,12 +2341,21 @@
                 </div>
               </div>
             </div>
+            <span class="sample-engine-pill">Qwen3-TTS</span>
           </div>
           <div class="sample-card">
             <div class="sample-card-header">
               <span class="sample-card-title">Suzan Clone</span>
             </div>
             <p class="sample-card-desc">Genesis4 Style</p>
+            <div class="sample-badges">
+              <span class="sample-badge">Qwen3-TTS</span>
+              <span class="sample-badge">Voice Clone</span>
+              <span class="sample-badge">23 Languages</span>
+              <span class="sample-badge">Style Prompt</span>
+            </div>
+            <div class="sample-divider"></div>
+            <p class="sample-card-copy">Reference and generated clips align on pitch contour with a more polished <span class="accent">studio-like cadence</span>.</p>
             <div class="sample-card-comparison">
               <div class="comparison-side">
                 <span class="comparison-label reference">Reference</span>
@@ -2080,12 +2376,22 @@
                 </div>
               </div>
             </div>
+            <span class="sample-engine-pill">Qwen3-TTS</span>
           </div>
           <div class="sample-card">
             <div class="sample-card-header">
               <span class="sample-card-title">Ryan</span>
             </div>
             <p class="sample-card-desc">Genesis4 Preset Voice</p>
+            <div class="sample-badges">
+              <span class="sample-badge">Qwen3-TTS</span>
+              <span class="sample-badge">Preset Voice</span>
+              <span class="sample-badge">English</span>
+              <span class="sample-badge">Long-form</span>
+            </div>
+            <div class="sample-divider"></div>
+            <p class="sample-card-copy">Preset speaker profile with dependable pronunciation for <span class="accent">general narration</span>.</p>
+            <span class="sample-engine-pill">Qwen3-TTS</span>
             <div class="audio-player" data-src="audio/qwen3/ryan-genesis4.wav">
               <button class="play-btn" aria-label="Play">
                 <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
@@ -2101,6 +2407,14 @@
               <span class="sample-card-title">Natasha (Hebrew)</span>
             </div>
             <p class="sample-card-desc">Multilingual Demo</p>
+            <div class="sample-badges">
+              <span class="sample-badge">Qwen3-TTS</span>
+              <span class="sample-badge">Voice Clone</span>
+              <span class="sample-badge">Hebrew</span>
+              <span class="sample-badge">Cross-language</span>
+            </div>
+            <div class="sample-divider"></div>
+            <p class="sample-card-copy">Cross-language cloning maps the same vocal identity into <span class="accent">multilingual output</span>.</p>
             <div class="sample-card-comparison">
               <div class="comparison-side">
                 <span class="comparison-label reference">Reference</span>
@@ -2121,6 +2435,7 @@
                 </div>
               </div>
             </div>
+            <span class="sample-engine-pill">Qwen3-TTS</span>
           </div>
         </div>
       </div>
@@ -2137,6 +2452,14 @@
               <span class="sample-card-title">Natasha Clone</span>
             </div>
             <p class="sample-card-desc">Emotional Speech Demo</p>
+            <div class="sample-badges">
+              <span class="sample-badge">ChatterBox</span>
+              <span class="sample-badge">Voice Clone</span>
+              <span class="sample-badge">Emotion Control</span>
+              <span class="sample-badge">Expressive</span>
+            </div>
+            <div class="sample-divider"></div>
+            <p class="sample-card-copy">Generated output adds emotional dynamics while preserving <span class="accent">speaker identity</span>.</p>
             <div class="sample-card-comparison">
               <div class="comparison-side">
                 <span class="comparison-label reference">Reference</span>
@@ -2157,12 +2480,21 @@
                 </div>
               </div>
             </div>
+            <span class="sample-engine-pill">ChatterBox</span>
           </div>
           <div class="sample-card">
             <div class="sample-card-header">
               <span class="sample-card-title">Suzan Clone</span>
             </div>
             <p class="sample-card-desc">Emotional Speech Demo</p>
+            <div class="sample-badges">
+              <span class="sample-badge">ChatterBox</span>
+              <span class="sample-badge">Voice Clone</span>
+              <span class="sample-badge">Emotion Control</span>
+              <span class="sample-badge">Expressive</span>
+            </div>
+            <div class="sample-divider"></div>
+            <p class="sample-card-copy">Emotion-aware rendering demonstrates richer contour and emphasis with <span class="accent">natural prosody shifts</span>.</p>
             <div class="sample-card-comparison">
               <div class="comparison-side">
                 <span class="comparison-label reference">Reference</span>
@@ -2183,6 +2515,7 @@
                 </div>
               </div>
             </div>
+            <span class="sample-engine-pill">ChatterBox</span>
           </div>
         </div>
       </div>
