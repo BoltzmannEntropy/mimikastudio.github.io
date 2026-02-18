@@ -6,7 +6,7 @@
   <title>MimikaStudio — Local Voice Cloning & TTS for macOS (Apple Silicon)</title>
   <meta name="description" content="Clone any voice in seconds. Local-first voice cloning, text-to-speech, PDF reader, and audiobook creator. Optimized for Apple Silicon with native Metal acceleration via MLX.">
   <meta property="og:title" content="MimikaStudio — Local Voice Cloning & TTS for macOS (Apple Silicon)">
-  <meta property="og:description" content="Clone any voice in seconds. 3 TTS engines, 23 languages. Native MLX acceleration on Apple Silicon. Windows support coming soon.">
+  <meta property="og:description" content="Clone any voice in seconds. 5 TTS engines, 23 languages. Native MLX acceleration on Apple Silicon. Windows support coming soon.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="images/01-mimikastudio.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -720,7 +720,7 @@
     /* ===== Engine Cards ===== */
     .engine-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 20px;
     }
 
@@ -2505,6 +2505,12 @@
           </div>
           <span class="carousel-name">Supertonic</span>
         </div>
+        <div class="carousel-item">
+          <div class="carousel-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 3l3 6 6 .8-4.4 4.2 1 6-5.6-3-5.6 3 1-6L3 9.8 9 9z"/></svg>
+          </div>
+          <span class="carousel-name">CosyVoice3</span>
+        </div>
         <!-- Set 2 (duplicate) -->
         <div class="carousel-item">
           <div class="carousel-icon accent-bg">
@@ -2529,6 +2535,12 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
           </div>
           <span class="carousel-name">Supertonic</span>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 3l3 6 6 .8-4.4 4.2 1 6-5.6-3-5.6 3 1-6L3 9.8 9 9z"/></svg>
+          </div>
+          <span class="carousel-name">CosyVoice3</span>
         </div>
         <!-- Set 3 (duplicate) -->
         <div class="carousel-item">
@@ -2555,6 +2567,12 @@
           </div>
           <span class="carousel-name">Supertonic</span>
         </div>
+        <div class="carousel-item">
+          <div class="carousel-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 3l3 6 6 .8-4.4 4.2 1 6-5.6-3-5.6 3 1-6L3 9.8 9 9z"/></svg>
+          </div>
+          <span class="carousel-name">CosyVoice3</span>
+        </div>
         <!-- Set 4 (duplicate for seamless loop) -->
         <div class="carousel-item">
           <div class="carousel-icon accent-bg">
@@ -2580,6 +2598,12 @@
           </div>
           <span class="carousel-name">Supertonic</span>
         </div>
+        <div class="carousel-item">
+          <div class="carousel-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 3l3 6 6 .8-4.4 4.2 1 6-5.6-3-5.6 3 1-6L3 9.8 9 9z"/></svg>
+          </div>
+          <span class="carousel-name">CosyVoice3</span>
+        </div>
       </div>
     </div>
   </section>
@@ -2589,7 +2613,7 @@
     <div class="container">
       <div class="section-header reveal">
         <div class="section-label label-gradient">TTS Engines</div>
-        <h2>Four engines, one studio</h2>
+        <h2>Five engines, one studio</h2>
         <p>Each engine brings unique strengths. Use the right one for your task, or combine them for maximum flexibility.</p>
       </div>
       <div class="engine-grid">
@@ -2632,12 +2656,22 @@
             <span class="engine-tag">Multilingual</span>
           </div>
         </div>
+        <div class="engine-card reveal reveal-d4">
+          <span class="engine-emoji">&#10024;</span>
+          <h3>CosyVoice3</h3>
+          <p class="engine-desc">Expressive MLX-native speech synthesis with preset voices, style control, and emotional delivery for narration.</p>
+          <div class="engine-tags">
+            <span class="engine-tag highlight">Expressive</span>
+            <span class="engine-tag">MLX Native</span>
+            <span class="engine-tag">5 languages</span>
+          </div>
+        </div>
       </div>
 
       <!-- Stats -->
       <div class="stats-row">
         <div class="stat reveal">
-          <div class="stat-number">4</div>
+          <div class="stat-number">5</div>
           <div class="stat-label">TTS Engines</div>
         </div>
         <div class="stat reveal reveal-d1">
@@ -2731,6 +2765,66 @@
             <p class="sample-card-copy">Warm and expressive tone with subtle emphasis on key phrases for <span class="accent">natural spoken prose</span>.</p>
             <span class="sample-engine-pill">Kokoro</span>
             <div class="audio-player" data-src="audio/kokoro/lily.wav">
+              <button class="play-btn" aria-label="Play">
+                <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+              </button>
+              <div class="audio-progress">
+                <canvas class="audio-visualizer" width="200" height="40"></canvas>
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+                <span class="audio-time">0:00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CosyVoice3 Samples -->
+      <div class="samples-model-group reveal">
+        <div class="samples-model-header">
+          <h3><span class="model-icon">&#10024;</span> CosyVoice3</h3>
+          <p>Emotionally expressive generation with preset voice styles and instant local playback.</p>
+        </div>
+        <div class="samples-grid">
+          <div class="sample-card">
+            <div class="sample-card-header">
+              <span class="sample-card-title">F1</span>
+            </div>
+            <p class="sample-card-desc">Genesis 4 Preview</p>
+            <div class="sample-badges">
+              <span class="sample-badge">CosyVoice3</span>
+              <span class="sample-badge">Preset Voice</span>
+              <span class="sample-badge">Expressive</span>
+              <span class="sample-badge">MLX Native</span>
+            </div>
+            <div class="sample-divider"></div>
+            <p class="sample-card-copy">Female preset tuned for expressive scripture narration with stable pacing and natural emphasis.</p>
+            <span class="sample-engine-pill">CosyVoice3</span>
+            <div class="audio-player" data-src="audio/cosyvoice3/cosyvoice3-f1-genesis4-demo.wav">
+              <button class="play-btn" aria-label="Play">
+                <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+              </button>
+              <div class="audio-progress">
+                <canvas class="audio-visualizer" width="200" height="40"></canvas>
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+                <span class="audio-time">0:00</span>
+              </div>
+            </div>
+          </div>
+          <div class="sample-card">
+            <div class="sample-card-header">
+              <span class="sample-card-title">M2</span>
+            </div>
+            <p class="sample-card-desc">Genesis 4 Preview</p>
+            <div class="sample-badges">
+              <span class="sample-badge">CosyVoice3</span>
+              <span class="sample-badge">Preset Voice</span>
+              <span class="sample-badge">Expressive</span>
+              <span class="sample-badge">Low-register</span>
+            </div>
+            <div class="sample-divider"></div>
+            <p class="sample-card-copy">Male preset with grounded tone and clear phrasing for audiobook-style read-aloud playback.</p>
+            <span class="sample-engine-pill">CosyVoice3</span>
+            <div class="audio-player" data-src="audio/cosyvoice3/cosyvoice3-m2-genesis4-demo.wav">
               <button class="play-btn" aria-label="Play">
                 <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
               </button>
