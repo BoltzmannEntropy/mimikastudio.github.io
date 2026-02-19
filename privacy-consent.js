@@ -173,7 +173,9 @@
           <p class="privacy-text">
             We use cookies to enhance your browsing experience and analyze site traffic.
             By clicking "Accept", you consent to our use of cookies in accordance with GDPR.
-            You can reject non-essential cookies by clicking "Reject".
+            You can reject non-essential cookies by clicking "Reject". See our
+            <a href="privacy.html">Privacy Policy</a> and
+            <a href="terms.html">Terms of Service</a>.
           </p>
         </div>
         <div class="privacy-actions">
