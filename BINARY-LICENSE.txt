@@ -1,7 +1,7 @@
 Binary Distribution License
 
 This Binary Distribution License ("License") governs use of the compiled
-binary distribution for Mimika (the "Binary"), including DMG, EXE, and
+binary distribution for MimikaStudio (the "Binary"), including DMG, EXE, and
 app bundles.
 
 1. License Grant

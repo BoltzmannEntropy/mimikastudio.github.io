@@ -1278,6 +1278,67 @@
       color: rgba(255, 255, 255, 0.72);
     }
 
+    .unsigned-install-note {
+      position: relative;
+      z-index: 1;
+      margin: 28px auto 0;
+      max-width: 980px;
+      text-align: left;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
+      padding: 22px;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
+    .unsigned-install-note h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .unsigned-install-note p {
+      margin: 0 0 12px;
+      max-width: none;
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    .unsigned-install-steps {
+      margin: 0 0 16px;
+      padding-left: 20px;
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1.6;
+    }
+
+    .unsigned-install-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .unsigned-install-shot {
+      margin: 0;
+      padding: 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(0, 0, 0, 0.25);
+    }
+
+    .unsigned-install-shot img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+    }
+
+    .unsigned-install-shot figcaption {
+      margin-top: 8px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.78);
+    }
+
     [data-theme="dark"] .cta-section {
       background: linear-gradient(135deg, var(--accent-dark) 0%, #4338ca 100%);
     }
@@ -1289,6 +1350,12 @@
 
     [data-theme="dark"] .cta-section .btn-primary:hover {
       box-shadow: 0 8px 32px rgba(255, 255, 255, 0.25);
+    }
+
+    @media (max-width: 900px) {
+      .unsigned-install-gallery {
+        grid-template-columns: 1fr;
+      }
     }
 
     /* ===== Footer ===== */
@@ -2175,7 +2242,7 @@
     <div class="container">
       <div class="hero-content">
         <div class="hero-badge reveal">
-          <span class="chip">v2026.02</span>
+          <span class="chip">v2026.02.3</span>
           macOS (Apple Silicon) &middot; MLX Native &middot; Windows coming soon
         </div>
         <h1 class="reveal reveal-d1">
@@ -2186,11 +2253,11 @@
           Optimized for Apple Silicon with native Metal acceleration via MLX.
         </p>
         <div class="hero-buttons reveal reveal-d3">
-          <a href="https://github.com/BoltzmannEntropy/MimikaStudio/releases/latest" class="btn-primary" target="_blank" rel="noopener">
+          <a href="https://github.com/BoltzmannEntropy/MimikaStudio/releases/download/v2026.02.3/MimikaStudio-2026.02.3-arm64.dmg" class="btn-primary" target="_blank" rel="noopener">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
               <path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/>
             </svg>
-            Download for OSX
+            Download for macOS
           </a>
           <a href="#download" class="btn-primary">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -3261,11 +3328,11 @@
       <h2 class="reveal">Start cloning voices today</h2>
       <p class="reveal reveal-d1">Runs locally on macOS (Apple Silicon). No account needed. Windows support coming soon.</p>
       <div class="hero-buttons reveal reveal-d2">
-        <a href="https://github.com/BoltzmannEntropy/MimikaStudio/releases/latest" class="btn-primary" target="_blank" rel="noopener">
+        <a href="https://github.com/BoltzmannEntropy/MimikaStudio/releases/download/v2026.02.3/MimikaStudio-2026.02.3-arm64.dmg" class="btn-primary" target="_blank" rel="noopener">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
             <path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/>
           </svg>
-          Download for OSX
+          Download for macOS
         </a>
         <a href="https://github.com/BoltzmannEntropy/MimikaStudio" class="btn-primary" target="_blank" rel="noopener">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -3285,9 +3352,50 @@
       <p class="hero-meta reveal reveal-d3" style="margin-top: 16px;">
         <span>macOS (Apple Silicon) &middot; MLX-Audio &middot; <a href="license.html">Open Source</a></span>
       </p>
-      <p class="hero-meta hero-meta-legal reveal reveal-d3" style="margin-top: 8px;">
-        The codebase is cross-platform, but we currently provide macOS binaries only. License: Source code is licensed under Business Source License 1.1 (BSL-1.1), and binary distributions are licensed under the Mimika Binary Distribution License. See <a href="LICENSE">LICENSE</a>, <a href="BINARY-LICENSE.txt">BINARY-LICENSE.txt</a>, and the <a href="license.html">website License page</a>.
+      <p class="hero-meta reveal reveal-d3" style="margin-top: 6px;">
+        <span>
+          Direct files:
+          <a href="https://github.com/BoltzmannEntropy/MimikaStudio/releases/download/v2026.02.3/MimikaStudio-2026.02.3-arm64.dmg" target="_blank" rel="noopener">DMG v2026.02.3</a>
+          &middot;
+          <a href="https://github.com/BoltzmannEntropy/MimikaStudio/releases/download/v2026.02.3/MimikaStudio-2026.02.3-arm64.dmg.sha256" target="_blank" rel="noopener">SHA256</a>
+        </span>
       </p>
+      <p class="hero-meta hero-meta-legal reveal reveal-d3" style="margin-top: 8px;">
+        The codebase is cross-platform, but we currently provide macOS binaries only. License: Source code is licensed under Business Source License 1.1 (BSL-1.1), and binary distributions are licensed under the MimikaStudio Binary Distribution License. See <a href="LICENSE">LICENSE</a>, <a href="BINARY-LICENSE.txt">BINARY-LICENSE.txt</a>, and the <a href="license.html">website License page</a>.
+      </p>
+      <div class="unsigned-install-note reveal reveal-d4">
+        <h3>Unsigned DMG Notice (Apple Gatekeeper)</h3>
+        <p>
+          As of February 19, 2026, the MimikaStudio DMG is not yet signed/notarized by Apple.
+          If macOS blocks launch, approve it once via Gatekeeper.
+        </p>
+        <ol class="unsigned-install-steps">
+          <li>Open the DMG and drag MimikaStudio to Applications.</li>
+          <li>In Applications, right-click MimikaStudio and choose <strong>Open</strong>.</li>
+          <li>Click <strong>Open</strong> again in the warning dialog.</li>
+          <li>If still blocked, go to <strong>System Settings -> Privacy &amp; Security -> Open Anyway</strong> for MimikaStudio.</li>
+          <li>On first launch, wait for backend startup; the startup log screen is expected for a few seconds.</li>
+          <li>On first use, download the required model from the in-app model card.</li>
+        </ol>
+        <div class="unsigned-install-gallery">
+          <figure class="unsigned-install-shot">
+            <img src="images/11-mimikastudio-dmg-install-window.png" alt="MimikaStudio DMG window with Applications shortcut" loading="lazy">
+            <figcaption>Step 1: Open DMG and drag MimikaStudio to Applications.</figcaption>
+          </figure>
+          <figure class="unsigned-install-shot">
+            <img src="images/12-mimikastudio-dmg-open-context-menu.png" alt="Right-click Open action for MimikaStudio in Finder" loading="lazy">
+            <figcaption>Step 2: Right-click the app and choose Open.</figcaption>
+          </figure>
+          <figure class="unsigned-install-shot">
+            <img src="images/13-mimikastudio-backend-startup-log.png" alt="MimikaStudio startup screen waiting for bundled backend" loading="lazy">
+            <figcaption>First launch: bundled backend startup log while the local server initializes.</figcaption>
+          </figure>
+          <figure class="unsigned-install-shot">
+            <img src="images/14-mimikastudio-first-use-model-download.png" alt="MimikaStudio first-use screen prompting model download" loading="lazy">
+            <figcaption>First use: click Download to fetch the required model before generating audio.</figcaption>
+          </figure>
+        </div>
+      </div>
     </div>
   </section>
 
