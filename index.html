@@ -2229,7 +2229,7 @@
           </a>
         </li>
         <li>
-          <a href="https://github.com/BoltzmannEntropy/MimikaStudio/releases/download/v2026.02.3/MimikaStudio-2026.02.3-arm64.dmg" class="nav-cta" target="_blank" rel="noopener">
+          <a href="https://github.com/BoltzmannEntropy/MimikaStudio/releases/download/v2026.02.4/MimikaStudio-2026.02.4-arm64.dmg" class="nav-cta" target="_blank" rel="noopener">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
               <polyline points="7 10 12 15 17 10"/>
@@ -2276,18 +2276,18 @@
     <div class="container">
       <div class="hero-content">
         <div class="hero-badge reveal">
-          <span class="chip">v2026.02.3</span>
-          macOS (Apple Silicon) &middot; MLX Native &middot; Windows coming soon
+          <span class="chip">v2026.02.4</span>
+          macOS (Apple Silicon) &middot; MLX + ONNX &middot; Windows coming soon
         </div>
         <h1 class="reveal reveal-d1">
           Clone any voice<br><span class="grad">in seconds</span>
         </h1>
         <p class="hero-sub reveal reveal-d2">
           Local-first voice cloning, text-to-speech, PDF reader, and audiobook creator.
-          Optimized for Apple Silicon with native Metal acceleration via MLX.
+          Optimized for Apple Silicon with native Metal acceleration via MLX and ONNX runtimes for multilingual TTS.
         </p>
         <div class="hero-buttons reveal reveal-d3">
-          <a href="https://github.com/BoltzmannEntropy/MimikaStudio/releases/download/v2026.02.3/MimikaStudio-2026.02.3-arm64.dmg" class="btn-primary" target="_blank" rel="noopener">
+          <a href="https://github.com/BoltzmannEntropy/MimikaStudio/releases/download/v2026.02.4/MimikaStudio-2026.02.4-arm64.dmg" class="btn-primary" target="_blank" rel="noopener">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
               <path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/>
             </svg>
@@ -2760,11 +2760,11 @@
         <div class="engine-card reveal reveal-d4">
           <span class="engine-emoji">&#10024;</span>
           <h3>CosyVoice3</h3>
-          <p class="engine-desc">Expressive MLX-native speech synthesis with preset voices, style control, and emotional delivery for narration.</p>
+          <p class="engine-desc">Standalone ONNX-based expressive speech synthesis with preset voices, style control, and emotional delivery for narration.</p>
           <div class="engine-tags">
             <span class="engine-tag highlight">Expressive</span>
-            <span class="engine-tag">MLX Native</span>
-            <span class="engine-tag">5 languages</span>
+            <span class="engine-tag">ONNX Runtime</span>
+            <span class="engine-tag">10 languages</span>
           </div>
         </div>
       </div>
@@ -2786,6 +2786,69 @@
         <div class="stat reveal reveal-d3">
           <div class="stat-number">60+</div>
           <div class="stat-label">API Endpoints</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Supported Models -->
+  <section class="section" id="supported-models">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label label-gradient">Supported Models</div>
+        <h2>Supported Models</h2>
+        <p>All models below appear in the in-app model manager with independent download and status tracking.</p>
+      </div>
+      <div class="engine-grid">
+        <div class="engine-card reveal">
+          <span class="engine-emoji">&#9889;</span>
+          <h3><a href="https://github.com/hexgrad/kokoro" target="_blank" rel="noopener">Kokoro-82M</a></h3>
+          <p class="engine-desc">Fast local TTS with British and American voice presets.</p>
+          <div class="engine-tags">
+            <span class="engine-tag highlight">MLX</span>
+            <span class="engine-tag">82M</span>
+            <span class="engine-tag">English</span>
+          </div>
+        </div>
+        <div class="engine-card reveal reveal-d1">
+          <span class="engine-emoji">&#127911;</span>
+          <h3><a href="https://github.com/QwenLM/Qwen3-TTS" target="_blank" rel="noopener">Qwen3-TTS</a></h3>
+          <p class="engine-desc">0.6B/1.7B Base + CustomVoice variants with optional 8-bit footprints.</p>
+          <div class="engine-tags">
+            <span class="engine-tag highlight">MLX</span>
+            <span class="engine-tag">Voice Clone</span>
+            <span class="engine-tag">8-bit options</span>
+          </div>
+        </div>
+        <div class="engine-card reveal reveal-d2">
+          <span class="engine-emoji">&#127758;</span>
+          <h3><a href="https://huggingface.co/mlx-community/chatterbox-fp16" target="_blank" rel="noopener">Chatterbox Multilingual</a></h3>
+          <p class="engine-desc">Expressive multilingual voice cloning with shared voice-library support.</p>
+          <div class="engine-tags">
+            <span class="engine-tag highlight">MLX</span>
+            <span class="engine-tag">23 languages</span>
+            <span class="engine-tag">Clone</span>
+          </div>
+        </div>
+        <div class="engine-card reveal reveal-d3">
+          <span class="engine-emoji">&#9889;</span>
+          <h3><a href="https://huggingface.co/Supertone/supertonic-2" target="_blank" rel="noopener">Supertonic-2</a></h3>
+          <p class="engine-desc">Dedicated ONNX multilingual TTS engine for fast preset-voice synthesis.</p>
+          <div class="engine-tags">
+            <span class="engine-tag highlight">ONNX Runtime</span>
+            <span class="engine-tag">Preset voices</span>
+            <span class="engine-tag">5 languages</span>
+          </div>
+        </div>
+        <div class="engine-card reveal reveal-d4">
+          <span class="engine-emoji">&#10024;</span>
+          <h3><a href="https://huggingface.co/ayousanz/cosy-voice3-onnx" target="_blank" rel="noopener">CosyVoice3 ONNX</a></h3>
+          <p class="engine-desc">Standalone CosyVoice3 model package (separate from Supertonic) with expressive preset voices.</p>
+          <div class="engine-tags">
+            <span class="engine-tag highlight">ONNX Runtime</span>
+            <span class="engine-tag">Independent model</span>
+            <span class="engine-tag">10 languages</span>
+          </div>
         </div>
       </div>
     </div>
@@ -2883,7 +2946,7 @@
       <div class="samples-model-group reveal">
         <div class="samples-model-header">
           <h3><span class="model-icon">&#10024;</span> CosyVoice3</h3>
-          <p>Emotionally expressive generation with preset voice styles and instant local playback.</p>
+          <p>Emotionally expressive standalone ONNX generation with preset voice styles and instant local playback.</p>
         </div>
         <div class="samples-grid">
           <div class="sample-card">
@@ -2895,7 +2958,7 @@
               <span class="sample-badge">CosyVoice3</span>
               <span class="sample-badge">Preset Voice</span>
               <span class="sample-badge">Expressive</span>
-              <span class="sample-badge">MLX Native</span>
+              <span class="sample-badge">ONNX Runtime</span>
             </div>
             <div class="sample-divider"></div>
             <p class="sample-card-copy">Female preset tuned for expressive scripture narration with stable pacing and natural emphasis.</p>
@@ -3362,7 +3425,7 @@
       <h2 class="reveal">Start cloning voices today</h2>
       <p class="reveal reveal-d1">Runs locally on macOS (Apple Silicon). No account needed. Windows support coming soon.</p>
       <div class="hero-buttons reveal reveal-d2">
-        <a href="https://github.com/BoltzmannEntropy/MimikaStudio/releases/download/v2026.02.3/MimikaStudio-2026.02.3-arm64.dmg" class="btn-primary" target="_blank" rel="noopener">
+        <a href="https://github.com/BoltzmannEntropy/MimikaStudio/releases/download/v2026.02.4/MimikaStudio-2026.02.4-arm64.dmg" class="btn-primary" target="_blank" rel="noopener">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
             <path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/>
           </svg>
@@ -3389,9 +3452,9 @@
       <p class="hero-meta reveal reveal-d3" style="margin-top: 6px;">
         <span>
           Direct files:
-          <a href="https://github.com/BoltzmannEntropy/MimikaStudio/releases/download/v2026.02.3/MimikaStudio-2026.02.3-arm64.dmg" target="_blank" rel="noopener">DMG v2026.02.3</a>
+          <a href="https://github.com/BoltzmannEntropy/MimikaStudio/releases/download/v2026.02.4/MimikaStudio-2026.02.4-arm64.dmg" target="_blank" rel="noopener">DMG v2026.02.4</a>
           &middot;
-          <a href="https://github.com/BoltzmannEntropy/MimikaStudio/releases/download/v2026.02.3/MimikaStudio-2026.02.3-arm64.dmg.sha256" target="_blank" rel="noopener">SHA256</a>
+          <a href="https://github.com/BoltzmannEntropy/MimikaStudio/releases/download/v2026.02.4/MimikaStudio-2026.02.4-arm64.dmg.sha256" target="_blank" rel="noopener">SHA256</a>
         </span>
       </p>
       <p class="hero-meta hero-meta-legal reveal reveal-d3" style="margin-top: 8px;">
