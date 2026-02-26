@@ -3198,9 +3198,9 @@
     <div class="container">
       <div class="showcase reversed reveal">
         <div class="showcase-text">
-          <div class="section-label label-gradient">MCP & API</div>
+          <div class="section-label label-gradient">Mimika MCP & API</div>
           <h3>60+ endpoints. 50+ MCP tools. Full control.</h3>
-          <p>Integrate MimikaStudio into your workflow with a comprehensive REST API and Model Context Protocol server. Use it programmatically from Claude Code, scripts, or your own applications.</p>
+          <p>Integrate MimikaStudio into your workflow with a comprehensive REST API and the Mimika MCP (Model Context Protocol) server. Use it programmatically from Claude Code, Codex, scripts, or your own applications.</p>
           <ul class="showcase-bullets">
             <li>
               <span class="bullet-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span>
@@ -3208,13 +3208,16 @@
             </li>
             <li>
               <span class="bullet-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-              MCP server for Claude Code integration
+              Mimika MCP server for Claude Code and Codex
             </li>
             <li>
               <span class="bullet-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span>
               Voice management, audiobook, and TTS endpoints
             </li>
           </ul>
+          <p style="margin-top:14px;">Example prompts once your client is connected to Mimika MCP at <code>http://127.0.0.1:8010</code>:</p>
+          <p style="margin-top:8px;"><strong>Codex:</strong> <code>Use Mimika MCP tool audiobook_generate_from_file with file_path=/absolute/path/to/document.pdf, voice=bf_emma, output_format=mp3. Then poll audiobook_status until completed.</code></p>
+          <p style="margin-top:8px;"><strong>Claude Code:</strong> <code>Call Mimika MCP audiobook_generate_from_file for /absolute/path/to/document.pdf with voice bf_emma and output_format mp3, then track audiobook_status every 10 seconds.</code></p>
         </div>
         <div class="showcase-img">
           <img src="images/05-mimikastudio.png" alt="MCP & API Dashboard" loading="lazy">
@@ -3368,7 +3371,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
           </div>
           <h3>CLI & MCP Server</h3>
-          <p>Full command-line interface and MCP server for automation. Integrate into Claude Code or any workflow.</p>
+          <p>Full command-line interface and MCP server for automation. Integrate into Claude Code, Codex, or any workflow.</p>
         </div>
       </div>
     </div>
