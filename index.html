@@ -1711,6 +1711,78 @@
 }
 
     /* ===== Audio Samples Section ===== */
+    /* Use Cases Section */
+    .use-cases-section {
+      padding: 100px 0;
+      background: var(--bg);
+    }
+
+    .use-cases-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .use-cases-content h2 {
+      font-size: 42px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 48px;
+      color: var(--text);
+    }
+
+    .use-case-item {
+      margin-bottom: 32px;
+    }
+
+    .use-case-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .use-case-item h4 {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .use-case-item p {
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--text-muted);
+      max-width: 420px;
+    }
+
+    .use-cases-visual {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #1a1a2e;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    .use-cases-visual img {
+      width: 100%;
+      display: block;
+    }
+
+    @media (max-width: 900px) {
+      .use-cases-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .use-cases-content h2 {
+        font-size: 32px;
+      }
+      .use-case-item p {
+        max-width: 100%;
+      }
+    }
+
     .samples-section {
       padding: 120px 0;
       background:
@@ -2367,6 +2439,49 @@
           <span class="macos-title">MimikaStudio</span>
         </div>
         <img src="images/09-mimikastudio-main-tts-engines.png" alt="MimikaStudio - Main Interface" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases Section -->
+  <section class="use-cases-section" id="use-cases">
+    <div class="container">
+      <div class="use-cases-grid">
+        <div class="use-cases-content">
+          <h2 class="reveal">Create studio-quality AI voices locally, with zero cloud dependency</h2>
+
+          <div class="use-case-item reveal reveal-d1">
+            <h4>Instant Voice Cloning</h4>
+            <p>Clone any voice from a 3-second sample. Qwen3-TTS learns timbre, pitch, and cadence while style prompts let you control emotion, pace, and tone.</p>
+          </div>
+
+          <div class="use-case-item reveal reveal-d2">
+            <h4>PDF to Audiobook</h4>
+            <p>Turn documents into full audiobooks with chapter markers and natural pacing. Follow along with sentence highlighting, or export hours of polished audio.</p>
+          </div>
+
+          <div class="use-case-item reveal reveal-d3">
+            <h4>Video Voiceovers</h4>
+            <p>Generate narration for YouTube, explainers, and ads. Switch between five TTS engines to find the perfect voice, then fine-tune with style controls.</p>
+          </div>
+
+          <div class="use-case-item reveal reveal-d4">
+            <h4>Privacy-First Processing</h4>
+            <p>Everything runs on your Mac with native Metal acceleration. No cloud uploads, no API limits, no subscriptions. Your voices stay on your device.</p>
+          </div>
+        </div>
+
+        <div class="use-cases-visual macos-window reveal">
+          <div class="macos-titlebar">
+            <div class="macos-buttons">
+              <span class="macos-btn close"></span>
+              <span class="macos-btn minimize"></span>
+              <span class="macos-btn maximize"></span>
+            </div>
+            <span class="macos-title">Voice Cloning</span>
+          </div>
+          <img src="images/02-mimikastudio.png" alt="MimikaStudio Voice Cloning" loading="lazy">
+        </div>
       </div>
     </div>
   </section>
