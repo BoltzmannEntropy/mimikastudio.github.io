@@ -3649,10 +3649,18 @@
         <h3>Unsigned DMG Notice (Apple Gatekeeper)</h3>
         <p>
           As of February 19, 2026, the MimikaStudio DMG is not yet signed/notarized by Apple.
-          If macOS blocks launch, approve it once via Gatekeeper.
+          If macOS blocks launch, you must remove the quarantine attribute and approve it via Gatekeeper.
         </p>
         <ol class="unsigned-install-steps">
-          <li>Open the DMG and drag MimikaStudio to Applications.</li>
+          <li>Open the DMG and drag MimikaStudio to <code>/Applications</code>.</li>
+          <li><strong>Remove the quarantine attribute</strong> by running this command in Terminal:
+            <pre style="background: rgba(0,0,0,0.4); padding: 12px; border-radius: 6px; margin: 8px 0; overflow-x: auto; font-size: 13px;"><code># If installed to /Applications (system-wide):
+xattr -d com.apple.quarantine /Applications/MimikaStudio.app
+
+# If installed to ~/Applications (user-only):
+xattr -d com.apple.quarantine ~/Applications/MimikaStudio.app</code></pre>
+            <em style="font-size: 13px; color: rgba(255,255,255,0.7);">Why? macOS quarantines all downloaded apps. For unsigned apps, Gatekeeper may block execution. This command removes the quarantine flag.</em>
+          </li>
           <li>In Applications, right-click MimikaStudio and choose <strong>Open</strong>.</li>
           <li>Click <strong>Open</strong> again in the warning dialog.</li>
           <li>If still blocked, go to <strong>System Settings -> Privacy &amp; Security -> Open Anyway</strong> for MimikaStudio.</li>
