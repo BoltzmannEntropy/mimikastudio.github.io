@@ -2383,7 +2383,7 @@
           Clone any voice<br><span class="grad">in seconds</span>
         </h1>
         <p class="hero-sub reveal reveal-d2">
-          Local-first voice cloning, text-to-speech, PDF reader, and audiobook creator.
+          Local-first voice cloning, text-to-speech, PDF reader, and <strong>audiobook creator.</strong>
           Now with agentic MCP support for Codex and Claude Code. Optimized for Apple Silicon with native Metal acceleration via MLX and ONNX runtimes for multilingual TTS.
         </p>
         <div class="hero-buttons reveal reveal-d3">
@@ -3072,6 +3072,66 @@
             <p class="sample-card-copy">Warm and expressive tone with subtle emphasis on key phrases for <span class="accent">natural spoken prose</span>.</p>
             <span class="sample-engine-pill">Kokoro</span>
             <div class="audio-player" data-src="audio/kokoro/lily.wav">
+              <button class="play-btn" aria-label="Play">
+                <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+              </button>
+              <div class="audio-progress">
+                <canvas class="audio-visualizer" width="200" height="40"></canvas>
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+                <span class="audio-time">0:00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Long-Form Audiobook Examples -->
+      <div class="samples-model-group reveal">
+        <div class="samples-model-header">
+          <h3><span class="model-icon">&#128214;</span> Long-Form Audiobooks</h3>
+          <p>Full audiobook excerpts generated with Kokoro TTS. H.G. Wells' "A Short History of the World" (~17 minutes each) at 0.95x speed for natural pacing.</p>
+        </div>
+        <div class="samples-grid">
+          <div class="sample-card">
+            <div class="sample-card-header">
+              <span class="sample-card-title">Emma</span>
+            </div>
+            <p class="sample-card-desc">British Female &middot; 17+ minutes</p>
+            <div class="sample-badges">
+              <span class="sample-badge">Kokoro</span>
+              <span class="sample-badge">Audiobook</span>
+              <span class="sample-badge">British RP</span>
+              <span class="sample-badge">0.95x Speed</span>
+            </div>
+            <div class="sample-divider"></div>
+            <p class="sample-card-copy">Full audiobook narration with Emma's crisp British accent. Perfect for <span class="accent">long-form document reading</span> and study material.</p>
+            <span class="sample-engine-pill">Kokoro</span>
+            <div class="audio-player" data-src="audio/audiobooks/long-history-emma.mp3">
+              <button class="play-btn" aria-label="Play">
+                <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+              </button>
+              <div class="audio-progress">
+                <canvas class="audio-visualizer" width="200" height="40"></canvas>
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+                <span class="audio-time">0:00</span>
+              </div>
+            </div>
+          </div>
+          <div class="sample-card">
+            <div class="sample-card-header">
+              <span class="sample-card-title">George</span>
+            </div>
+            <p class="sample-card-desc">British Male &middot; 19+ minutes</p>
+            <div class="sample-badges">
+              <span class="sample-badge">Kokoro</span>
+              <span class="sample-badge">Audiobook</span>
+              <span class="sample-badge">British RP</span>
+              <span class="sample-badge">0.95x Speed</span>
+            </div>
+            <div class="sample-divider"></div>
+            <p class="sample-card-copy">Rich male narration with George's authoritative tone. Ideal for <span class="accent">history and non-fiction</span> audiobook exports.</p>
+            <span class="sample-engine-pill">Kokoro</span>
+            <div class="audio-player" data-src="audio/audiobooks/long-history-george.mp3">
               <button class="play-btn" aria-label="Play">
                 <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
               </button>
