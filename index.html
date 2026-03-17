@@ -2064,6 +2064,132 @@
       margin-left: 0;
     }
 
+    .skip-btn, .stop-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1.5px solid #94a3b8;
+      background: linear-gradient(180deg, #f6f8fd 0%, #eef3fb 100%);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      box-shadow: 0 2px 6px rgba(59, 130, 246, 0.1);
+    }
+
+    .skip-btn:hover, .stop-btn:hover {
+      transform: scale(1.06);
+      border-color: #3b82f6;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+    }
+
+    .skip-btn svg, .stop-btn svg {
+      width: 14px;
+      height: 14px;
+      fill: #64748b;
+    }
+
+    .skip-btn:hover svg, .stop-btn:hover svg {
+      fill: #3b82f6;
+    }
+
+    [data-theme="dark"] .skip-btn,
+    [data-theme="dark"] .stop-btn {
+      background: linear-gradient(180deg, #1e293b 0%, #111827 100%);
+      border-color: #475569;
+    }
+
+    [data-theme="dark"] .skip-btn svg,
+    [data-theme="dark"] .stop-btn svg {
+      fill: #94a3b8;
+    }
+
+    [data-theme="dark"] .skip-btn:hover,
+    [data-theme="dark"] .stop-btn:hover {
+      border-color: #60a5fa;
+    }
+
+    [data-theme="dark"] .skip-btn:hover svg,
+    [data-theme="dark"] .stop-btn:hover svg {
+      fill: #60a5fa;
+    }
+
+    .audio-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .audiobook-player {
+      position: relative;
+      top: auto;
+      right: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      padding: 16px;
+      margin-top: 12px;
+      background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+    }
+
+    [data-theme="dark"] .audiobook-player {
+      background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+      border-color: #334155;
+    }
+
+    .audiobook-player .audio-progress {
+      position: relative;
+      width: 100%;
+      height: auto;
+      padding: 0;
+      margin: 0;
+      overflow: visible;
+      clip: auto;
+      white-space: normal;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .audiobook-player .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 4px;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    [data-theme="dark"] .audiobook-player .progress-bar {
+      background: #334155;
+    }
+
+    .audiobook-player .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #3b82f6 0%, #6366f1 100%);
+      border-radius: 4px;
+      transition: width 0.1s ease;
+    }
+
+    .audiobook-player .audio-time {
+      font-size: 13px;
+      font-weight: 500;
+      color: #64748b;
+      text-align: center;
+    }
+
+    [data-theme="dark"] .audiobook-player .audio-time {
+      color: #94a3b8;
+    }
+
+    .audiobook-player .audio-visualizer {
+      display: none;
+    }
+
     .audio-progress {
       position: absolute;
       width: 1px;
@@ -2439,6 +2565,181 @@
           <span class="macos-title">MimikaStudio</span>
         </div>
         <img src="images/09-mimikastudio-main-tts-engines.png" alt="MimikaStudio - Main Interface" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- Long-Form Audiobooks Showcase -->
+  <section class="samples-section" id="audiobooks">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label label-gradient">Long-Form Audiobooks</div>
+        <h2>Full-length audiobook generation</h2>
+        <p>Listen to complete chapters generated locally on Apple Silicon. Qwen3 Clone delivers studio-quality narration from your custom voice prompts.</p>
+      </div>
+
+      <!-- Qwen3 Clone Audiobooks (High Quality) -->
+      <div class="samples-model-group reveal">
+        <div class="samples-model-header">
+          <h3><span class="model-icon">&#127911;</span> Qwen3 Clone — Premium Quality</h3>
+          <p>Voice-cloned narration with natural prosody and emotional depth. "A Scandal in Bohemia" from Conan Doyle's Sherlock Holmes (public domain). Each audiobook is ~43 minutes of continuous speech.</p>
+        </div>
+        <div class="samples-grid">
+          <div class="sample-card">
+            <div class="sample-card-header">
+              <span class="sample-card-title">Yelena</span>
+            </div>
+            <p class="sample-card-desc">Sherlock Holmes &middot; 43m 20s</p>
+            <div class="sample-badges">
+              <span class="sample-badge">Qwen3 Clone</span>
+              <span class="sample-badge">Premium</span>
+              <span class="sample-badge">Female</span>
+              <span class="sample-badge">1.0x Speed</span>
+            </div>
+            <div class="sample-divider"></div>
+            <p class="sample-card-copy">"A Scandal in Bohemia" with Yelena's cloned voice. Full 20-page chapter with <span class="accent">natural pacing and expression</span>.</p>
+            <span class="sample-engine-pill">Qwen3</span>
+            <div class="audio-player audiobook-player" data-src="audio/audiobooks/long-sherlock-yelena.mp3">
+              <div class="audio-controls">
+                <button class="skip-btn skip-back" aria-label="Skip back 30 seconds">
+                  <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/><text x="12" y="15" font-size="7" text-anchor="middle" fill="currentColor">30</text></svg>
+                </button>
+                <button class="play-btn" aria-label="Play">
+                  <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                </button>
+                <button class="stop-btn" aria-label="Stop">
+                  <svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="1"/></svg>
+                </button>
+                <button class="skip-btn skip-forward" aria-label="Skip forward 30 seconds">
+                  <svg viewBox="0 0 24 24"><path d="M12 5V1l5 5-5 5V7c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6h2c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8z"/><text x="12" y="15" font-size="7" text-anchor="middle" fill="currentColor">30</text></svg>
+                </button>
+              </div>
+              <div class="audio-progress">
+                <canvas class="audio-visualizer" width="200" height="40"></canvas>
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+                <span class="audio-time">0:00</span>
+              </div>
+            </div>
+          </div>
+          <div class="sample-card">
+            <div class="sample-card-header">
+              <span class="sample-card-title">Mikhail</span>
+            </div>
+            <p class="sample-card-desc">Sherlock Holmes &middot; 45m 36s</p>
+            <div class="sample-badges">
+              <span class="sample-badge">Qwen3 Clone</span>
+              <span class="sample-badge">Premium</span>
+              <span class="sample-badge">Male</span>
+              <span class="sample-badge">1.0x Speed</span>
+            </div>
+            <div class="sample-divider"></div>
+            <p class="sample-card-copy">"A Scandal in Bohemia" with Mikhail's cloned voice. Holmes and Watson with <span class="accent">expressive male narration</span>.</p>
+            <span class="sample-engine-pill">Qwen3</span>
+            <div class="audio-player audiobook-player" data-src="audio/audiobooks/long-sherlock-mikhail.mp3">
+              <div class="audio-controls">
+                <button class="skip-btn skip-back" aria-label="Skip back 30 seconds">
+                  <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/><text x="12" y="15" font-size="7" text-anchor="middle" fill="currentColor">30</text></svg>
+                </button>
+                <button class="play-btn" aria-label="Play">
+                  <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                </button>
+                <button class="stop-btn" aria-label="Stop">
+                  <svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="1"/></svg>
+                </button>
+                <button class="skip-btn skip-forward" aria-label="Skip forward 30 seconds">
+                  <svg viewBox="0 0 24 24"><path d="M12 5V1l5 5-5 5V7c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6h2c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8z"/><text x="12" y="15" font-size="7" text-anchor="middle" fill="currentColor">30</text></svg>
+                </button>
+              </div>
+              <div class="audio-progress">
+                <canvas class="audio-visualizer" width="200" height="40"></canvas>
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+                <span class="audio-time">0:00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kokoro Audiobooks (Fast Generation) -->
+      <div class="samples-model-group reveal">
+        <div class="samples-model-header">
+          <h3><span class="model-icon">&#128214;</span> Kokoro TTS — Fast Generation</h3>
+          <p>Built-in voices with quick generation. Marcus Aurelius' "Meditations" (public domain). Ideal for rapid prototyping and shorter texts.</p>
+        </div>
+        <div class="samples-grid">
+          <div class="sample-card">
+            <div class="sample-card-header">
+              <span class="sample-card-title">Emma</span>
+            </div>
+            <p class="sample-card-desc">British Female &middot; 12m 28s</p>
+            <div class="sample-badges">
+              <span class="sample-badge">Kokoro</span>
+              <span class="sample-badge">Fast</span>
+              <span class="sample-badge">British RP</span>
+              <span class="sample-badge">0.95x Speed</span>
+            </div>
+            <div class="sample-divider"></div>
+            <p class="sample-card-copy">"Meditations" with Emma's crisp British accent. Good for <span class="accent">quick audiobook drafts</span>.</p>
+            <span class="sample-engine-pill">Kokoro</span>
+            <div class="audio-player audiobook-player" data-src="audio/audiobooks/long-meditations-emma.mp3">
+              <div class="audio-controls">
+                <button class="skip-btn skip-back" aria-label="Skip back 30 seconds">
+                  <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/><text x="12" y="15" font-size="7" text-anchor="middle" fill="currentColor">30</text></svg>
+                </button>
+                <button class="play-btn" aria-label="Play">
+                  <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                </button>
+                <button class="stop-btn" aria-label="Stop">
+                  <svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="1"/></svg>
+                </button>
+                <button class="skip-btn skip-forward" aria-label="Skip forward 30 seconds">
+                  <svg viewBox="0 0 24 24"><path d="M12 5V1l5 5-5 5V7c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6h2c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8z"/><text x="12" y="15" font-size="7" text-anchor="middle" fill="currentColor">30</text></svg>
+                </button>
+              </div>
+              <div class="audio-progress">
+                <canvas class="audio-visualizer" width="200" height="40"></canvas>
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+                <span class="audio-time">0:00</span>
+              </div>
+            </div>
+          </div>
+          <div class="sample-card">
+            <div class="sample-card-header">
+              <span class="sample-card-title">George</span>
+            </div>
+            <p class="sample-card-desc">British Male &middot; 13m 36s</p>
+            <div class="sample-badges">
+              <span class="sample-badge">Kokoro</span>
+              <span class="sample-badge">Fast</span>
+              <span class="sample-badge">British RP</span>
+              <span class="sample-badge">0.95x Speed</span>
+            </div>
+            <div class="sample-divider"></div>
+            <p class="sample-card-copy">"Meditations" with George's grounded tone. Suitable for <span class="accent">essay-length exports</span>.</p>
+            <span class="sample-engine-pill">Kokoro</span>
+            <div class="audio-player audiobook-player" data-src="audio/audiobooks/long-meditations-george.mp3">
+              <div class="audio-controls">
+                <button class="skip-btn skip-back" aria-label="Skip back 30 seconds">
+                  <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/><text x="12" y="15" font-size="7" text-anchor="middle" fill="currentColor">30</text></svg>
+                </button>
+                <button class="play-btn" aria-label="Play">
+                  <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                </button>
+                <button class="stop-btn" aria-label="Stop">
+                  <svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="1"/></svg>
+                </button>
+                <button class="skip-btn skip-forward" aria-label="Skip forward 30 seconds">
+                  <svg viewBox="0 0 24 24"><path d="M12 5V1l5 5-5 5V7c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6h2c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8z"/><text x="12" y="15" font-size="7" text-anchor="middle" fill="currentColor">30</text></svg>
+                </button>
+              </div>
+              <div class="audio-progress">
+                <canvas class="audio-visualizer" width="200" height="40"></canvas>
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+                <span class="audio-time">0:00</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -3072,116 +3373,6 @@
             <p class="sample-card-copy">Warm and expressive tone with subtle emphasis on key phrases for <span class="accent">natural spoken prose</span>.</p>
             <span class="sample-engine-pill">Kokoro</span>
             <div class="audio-player" data-src="audio/kokoro/lily.wav">
-              <button class="play-btn" aria-label="Play">
-                <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
-              </button>
-              <div class="audio-progress">
-                <canvas class="audio-visualizer" width="200" height="40"></canvas>
-                <div class="progress-bar"><div class="progress-fill"></div></div>
-                <span class="audio-time">0:00</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Long-Form Audiobook Examples -->
-      <div class="samples-model-group reveal">
-        <div class="samples-model-header">
-          <h3><span class="model-icon">&#128214;</span> Long-Form Audiobooks</h3>
-          <p>Full audiobook excerpts generated with Qwen3 Clone and Kokoro TTS from public domain classics. The source text is normalized before generation so no words are cut in the middle by line-wrap artifacts.</p>
-        </div>
-        <div class="samples-grid">
-          <div class="sample-card">
-            <div class="sample-card-header">
-              <span class="sample-card-title">Yelena</span>
-            </div>
-            <p class="sample-card-desc">Sherlock Holmes &middot; 43m 20s</p>
-            <div class="sample-badges">
-              <span class="sample-badge">Qwen3 Clone</span>
-              <span class="sample-badge">Audiobook</span>
-              <span class="sample-badge">Female</span>
-              <span class="sample-badge">1.0x Speed</span>
-            </div>
-            <div class="sample-divider"></div>
-            <p class="sample-card-copy">"A Scandal in Bohemia" narrated with Yelena's cloned voice. Full 20-page chapter from Conan Doyle's classic <span class="accent">public domain detective fiction</span>.</p>
-            <span class="sample-engine-pill">Qwen3</span>
-            <div class="audio-player" data-src="audio/audiobooks/long-sherlock-yelena.mp3">
-              <button class="play-btn" aria-label="Play">
-                <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
-              </button>
-              <div class="audio-progress">
-                <canvas class="audio-visualizer" width="200" height="40"></canvas>
-                <div class="progress-bar"><div class="progress-fill"></div></div>
-                <span class="audio-time">0:00</span>
-              </div>
-            </div>
-          </div>
-          <div class="sample-card">
-            <div class="sample-card-header">
-              <span class="sample-card-title">Mikhail</span>
-            </div>
-            <p class="sample-card-desc">Sherlock Holmes &middot; 45m 36s</p>
-            <div class="sample-badges">
-              <span class="sample-badge">Qwen3 Clone</span>
-              <span class="sample-badge">Audiobook</span>
-              <span class="sample-badge">Male</span>
-              <span class="sample-badge">1.0x Speed</span>
-            </div>
-            <div class="sample-divider"></div>
-            <p class="sample-card-copy">"A Scandal in Bohemia" narrated with Mikhail's cloned voice. Holmes and Watson's investigation with <span class="accent">expressive male narration</span>.</p>
-            <span class="sample-engine-pill">Qwen3</span>
-            <div class="audio-player" data-src="audio/audiobooks/long-sherlock-mikhail.mp3">
-              <button class="play-btn" aria-label="Play">
-                <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
-              </button>
-              <div class="audio-progress">
-                <canvas class="audio-visualizer" width="200" height="40"></canvas>
-                <div class="progress-bar"><div class="progress-fill"></div></div>
-                <span class="audio-time">0:00</span>
-              </div>
-            </div>
-          </div>
-          <div class="sample-card">
-            <div class="sample-card-header">
-              <span class="sample-card-title">Emma</span>
-            </div>
-            <p class="sample-card-desc">British Female &middot; 12m 28s</p>
-            <div class="sample-badges">
-              <span class="sample-badge">Kokoro</span>
-              <span class="sample-badge">Audiobook</span>
-              <span class="sample-badge">British RP</span>
-              <span class="sample-badge">0.95x Speed</span>
-            </div>
-            <div class="sample-divider"></div>
-            <p class="sample-card-copy">Marcus Aurelius' "Meditations" narrated with Emma's crisp British accent. Ideal for <span class="accent">long-form reading</span> and reflective listening.</p>
-            <span class="sample-engine-pill">Kokoro</span>
-            <div class="audio-player" data-src="audio/audiobooks/long-meditations-emma.mp3">
-              <button class="play-btn" aria-label="Play">
-                <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
-              </button>
-              <div class="audio-progress">
-                <canvas class="audio-visualizer" width="200" height="40"></canvas>
-                <div class="progress-bar"><div class="progress-fill"></div></div>
-                <span class="audio-time">0:00</span>
-              </div>
-            </div>
-          </div>
-          <div class="sample-card">
-            <div class="sample-card-header">
-              <span class="sample-card-title">George</span>
-            </div>
-            <p class="sample-card-desc">British Male &middot; 13m 36s</p>
-            <div class="sample-badges">
-              <span class="sample-badge">Kokoro</span>
-              <span class="sample-badge">Audiobook</span>
-              <span class="sample-badge">British RP</span>
-              <span class="sample-badge">0.95x Speed</span>
-            </div>
-            <div class="sample-divider"></div>
-            <p class="sample-card-copy">Measured philosophical narration with George's grounded tone. A strong fit for <span class="accent">essay-length audiobooks</span> and study exports.</p>
-            <span class="sample-engine-pill">Kokoro</span>
-            <div class="audio-player" data-src="audio/audiobooks/long-meditations-george.mp3">
               <button class="play-btn" aria-label="Play">
                 <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
               </button>
@@ -4111,6 +4302,51 @@ xattr -d com.apple.quarantine ~/Applications/MimikaStudio.app</code></pre>
           audio.currentTime = percent * audio.duration;
         }
       });
+
+      // Skip back button (30 seconds)
+      const skipBackBtn = player.querySelector('.skip-back');
+      if (skipBackBtn) {
+        skipBackBtn.addEventListener('click', () => {
+          if (audio) {
+            audio.currentTime = Math.max(0, audio.currentTime - 30);
+          }
+        });
+      }
+
+      // Skip forward button (30 seconds)
+      const skipForwardBtn = player.querySelector('.skip-forward');
+      if (skipForwardBtn) {
+        skipForwardBtn.addEventListener('click', () => {
+          if (audio) {
+            audio.currentTime = Math.min(audio.duration, audio.currentTime + 30);
+          }
+        });
+      }
+
+      // Stop button
+      const stopBtn = player.querySelector('.stop-btn');
+      if (stopBtn) {
+        stopBtn.addEventListener('click', () => {
+          if (audio) {
+            audio.pause();
+            audio.currentTime = 0;
+            btn.classList.remove('playing');
+            btn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>';
+            progressFill.style.width = '0%';
+            if (audio.duration) {
+              timeDisplay.textContent = formatTime(audio.duration);
+            }
+            if (currentAnimationId) {
+              cancelAnimationFrame(currentAnimationId);
+              currentAnimationId = null;
+            }
+            if (canvas) drawStaticBars(canvas);
+            currentCanvas = null;
+            currentAudio = null;
+            currentBtn = null;
+          }
+        });
+      }
     });
 
     // Mini audio players
