@@ -16,15 +16,15 @@ Add an audio samples section to the MimikaStudio website where users can listen 
 - Source: `/MimikaCODE/backend/data/samples/kokoro/`
 
 ### Qwen3-TTS (Voice Cloning)
-- natasha-genesis4, suzan-genesis4, aiden-genesis4, ryan-genesis4, natasha-hebrew
+- yelena-genesis4, svetlana-genesis4, aiden-genesis4, ryan-genesis4, yelena-hebrew
 - Source: `/MimikaCODE/backend/data/pregenerated/`
 
 ### ChatterBox (Emotional Speech)
-- natasha-demo, suzan-demo
+- yelena-demo, svetlana-demo
 - Source: `/MimikaCODE/backend/data/pregenerated/`
 
 ### Reference Voices
-- Natasha.wav, Suzan.wav, Max.wav, Sara.wav
+- Yelena.wav, Svetlana.wav, Mikhail.wav, Anastasia.wav
 - Source: `/MimikaCODE/backend/data/samples/voices/`
 
 ## File Structure
