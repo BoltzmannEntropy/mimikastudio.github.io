@@ -6,6 +6,15 @@ License: Source code is licensed under Business Source License 1.1 (BSL-1.1), an
 
 MimikaStudio ships with a local MCP server (`http://127.0.0.1:8010`) that exposes audiobook, TTS, and voice-management tools.
 
+## Shipped Voices And Language Demos
+
+MimikaStudio ships with 8 custom-designed reference voices for Qwen3 voice cloning:
+`Alistair`, `Anastasia`, `Beatrice`, `Eleanor`, `Harriet`, `Mikhail`, `Svetlana`, and `Yelena`.
+
+The website now includes a Qwen3 supported-language showcase with Genesis 1:1 demos for every clone language:
+English, Chinese, Japanese, Korean, German, French, Russian, Portuguese, Spanish, and Italian.
+Each demo names the voice used and includes the transcript directly in the page.
+
 Example JSON-RPC flow used by MCP clients:
 
 ```bash
